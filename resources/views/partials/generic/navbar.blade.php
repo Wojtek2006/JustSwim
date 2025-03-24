@@ -8,7 +8,7 @@
                 <a class="nav-link" href="index.php">Strona główna</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="contenders.php">Zawodnicy</a>
+                <a class="nav-link" href="{{ route('contenders') }}">Zawodnicy</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="teams.php">Drużyny</a>

@@ -1,5 +1,5 @@
-@extends("base/baseapp")
+@extends("base.baseapp", ['view_title' => 'Strona główna'])
 
 @section("content")
-    @include("partials/landing/landing")
+    @include("partials.landing.landing")
 @endsection
