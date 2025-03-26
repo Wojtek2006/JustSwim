@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="UTF-8">
@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    @include("partials.generic.navbar")
+    @include("partials.navbar")
     <div class="container">
         @yield("content")
     </div>

@@ -1,14 +1,14 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3">
-    <a class="navbar-brand" href="{{ route('landing') }}">
+    <a class="navbar-brand" href="{{ route('index') }}">
         <img src="..." width="30" height="30" class="d-inline-block align-top placeholder" alt="">
         Zawody pływania</a>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
         <ul class="navbar-nav me-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('landing') }}">Strona główna</a>
+                <a class="nav-link" href="{{ route('index') }}">Strona główna</a> 
             </li>
             <li class="nav-item">
-                <!-- <a class="nav-link" href="{{ route('contenders') }}">Zawodnicy</a> -->
+                <!-- <a class="nav-link" href="">Zawodnicy</a> -->
                 <!-- TODO: -->
                 <!-- zależy co chcemy zrobić bo można rozdzielić wyświetlanie zawodnnikow tworzenie usuwanie na rozne widoki niby ale to chyba nie ma sensu najlepiej i tak bedzie zrobic jeden i zmieniac na zywo -->
                 <div class="btn-group">
@@ -28,10 +28,10 @@
 
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="teams.php">Drużyny</a>
+                <a class="nav-link" href="{{ route('teams') }}">Drużyny</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="competitions.php">Zawody</a>
+                <a class="nav-link" href="{{'competitions'}}">Zawody</a>
             </li>
         </ul>
     </div>
