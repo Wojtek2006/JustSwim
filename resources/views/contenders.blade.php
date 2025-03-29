@@ -2,7 +2,8 @@
 
 @section('scripts')
     <script src="{{ asset('js/contenders.js') }}"></script>
-
+    <script>
+    </script>
 @endsection
 
 @section('content')
@@ -92,5 +93,3 @@
         </div>
     </div>
 @endsection
-
-scr
