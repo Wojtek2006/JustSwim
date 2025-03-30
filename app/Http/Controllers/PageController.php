@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Contender;
+use App\Models\Competition;
 
 class PageController extends Controller
 {
@@ -11,7 +13,9 @@ class PageController extends Controller
     }
 
     public function contenders() {
-        return view('contenders');
+        $contenders = Contender::all();
+
+        return view('contenders', ['contenders' => $contenders]);
     }
 
     public function teams() {
@@ -19,6 +23,8 @@ class PageController extends Controller
     }
 
     public function competitions() {
-        return view('competitions');
+        $competitions = Competition::all();
+
+        return view('competitions', ['competitions' => $competitions]);
     }
 }

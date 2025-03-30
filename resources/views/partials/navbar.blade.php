@@ -14,7 +14,7 @@
                 <a class="nav-link" href="{{ route('teams') }}">Drużyny</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{'competitions'}}">Zawody</a>
+                <a class="nav-link" href="{{route('competitions')}}">Zawody</a>
             </li>
         </ul>
     </div>
