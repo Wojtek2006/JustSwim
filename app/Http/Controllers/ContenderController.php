@@ -20,6 +20,6 @@ class ContenderController extends Controller
 
         $contender->save();
 
-        return redirect()->route('index');
+        return redirect()->route('contenders');
     }
 }

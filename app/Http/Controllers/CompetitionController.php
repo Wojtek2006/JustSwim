@@ -15,6 +15,6 @@ class CompetitionController extends Controller
 
         $competition->save();
 
-        return redirect()->route('index');
+        return redirect()->route('competitions');
     }
 }

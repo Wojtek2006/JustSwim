@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ContenderController;
 use App\Http\Controllers\CompetitionController;
+use App\Http\Controllers\TeamController;
 
 
 // PAGE SEGMENT
@@ -18,3 +19,6 @@ Route::post('/contenders', [ContenderController::class, 'createContender'])->nam
 
 // COMPETITION MODEL SEGMENT
 Route::post('/competitions', [CompetitionController::class, 'createCompetition'])->name('createCompetition');
+
+// TEAM MODEL SEGMENT
+Route::post('/teams', [TeamController::class, 'createTeam'])->name('createTeam');

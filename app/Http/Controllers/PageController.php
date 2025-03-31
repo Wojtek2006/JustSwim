@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Contender;
 use App\Models\Competition;
+use App\Models\Team;
 
 class PageController extends Controller
 {
@@ -19,7 +20,9 @@ class PageController extends Controller
     }
 
     public function teams() {
-        return view('teams');
+        $teams = Team::all();
+
+        return view('teams', ['teams' => $teams]);
     }
 
     public function competitions() {
