@@ -7,11 +7,21 @@ $(document).ready(() => {
     const $saveButton = $("#contender-add-save-button");
 
     function isFormValid() {
+        // Check if all required fields are filled and valid
         const nameValid = $nameInput.val().trim() !== "";
         const surnameValid = $surnameInput.val().trim() !== "";
+        const gradeValid =
+            $gradeInput.val().trim() !== "" && $gradeInput.length <= 3;
         const genderValid = $genderRadios.is(":checked");
-        const statusValid = $statusRadios.is(":checked");
-        const gradeValid = $gradeInput.val().trim() !== "";
+        const statusValid = $statusRadios.filter(":checked").length > 0;
+
+        // console.log("Form validation:", {
+        //     nameValid,
+        //     surnameValid,
+        //     genderValid,
+        //     statusValid,
+        //     gradeValid,
+        // }); czarna magia do debugowania
 
         return (
             nameValid &&
@@ -23,6 +33,7 @@ $(document).ready(() => {
     }
 
     function toggleSaveButton() {
+        // Check if all required fields are filled and enable/disable the button accordingly
         $saveButton.prop("disabled", !isFormValid());
     }
 
@@ -30,37 +41,16 @@ $(document).ready(() => {
     $nameInput.on("input", toggleSaveButton);
     $surnameInput.on("input", toggleSaveButton);
     $gradeInput.on("input", toggleSaveButton);
-
     $genderRadios.on("change", toggleSaveButton);
     $statusRadios.on("change", toggleSaveButton);
 
     // Initialize button state
     toggleSaveButton();
-    console.log("contenders.js loaded");
+    // console.log("contenders.js loaded");
 
     $saveButton.on("click", (event) => {
-        event.preventDefault(); // Prevent default form submission
-        // i teraz tutaj mozna po prostu wysłać POST do aplikacji np. view contenders/add i tam będzie dodawanie
-        $.ajax({
-            url: "<URL>", // Zmienić na odpowiedni URL
-            method: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(contenderData),
-            success: (response) => {
-                console.log("Dodano:", response);
-                alert("Dodano zawodnika");
-                // restart wartości
-                $nameInput.val("");
-                $surnameInput.val("");
-                $gradeInput.val("");
-                $genderRadios.prop("checked", false);
-                $statusRadios.prop("checked", false);
-                toggleSaveButton();
-            },
-            error: (xhr, status, error) => {
-                console.error("Error:", error);
-                alert("Error podczas dodawania zawodnika");
-            },
-        });
+        event.preventDefault();
+        // alert("Contender added!");
+        // TODO: dodawanie zawodnika do bazy danych
     });
 });
