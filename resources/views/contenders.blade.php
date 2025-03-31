@@ -37,7 +37,7 @@
                         <td>{{ $contender->last_name }}</td>
                         <td>{{ $contender->class }}</td>
                         <td>{{ $contender->gender }}</td>
-                        <td>{{ $contender->status }}</td>
+                        <td>{{ $contender->status }}</td> 
                     </tr>
                 @endforeach
             </tbody>
@@ -88,11 +88,11 @@
                                     <label for="" class="form-label">Płeć</label>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender" value="K" id="" />
+                                        <input class="form-check-input" type="radio" name="contender-add-gender" value="K" id="" />
                                         <label class="form-check-label" for="gender"> Kobieta </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender" value="M" id=""
+                                        <input class="form-check-input" type="radio" name="contender-add-gender" value="M" id=""
                                             checked />
                                         <label class="form-check-label" for="gender"> Mężczyzna </label>
                                     </div>
@@ -101,12 +101,12 @@
                                     <label for="" class="form-label">Status</label>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="status" value="C" id=""
+                                        <input class="form-check-input" type="radio" name="contender-add-status" value="C" id=""
                                             checked />
                                         <label class="form-check-label" for="status"> Cywil </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="status" value="W" id="" />
+                                        <input class="form-check-input" type="radio" name="contender-add-status" value="W" id="" />
 
                                         <label class="form-check-label" for="status"> Wojskowy </label>
                                     </div>
@@ -115,7 +115,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
-                            <button type="submit" class="btn btn-primary">Zapisz</button>
+                            <button type="submit" class="btn btn-primary" id="contender-add-save-button">Zapisz</button>
                         </div>
                     </form>
                 </div>
