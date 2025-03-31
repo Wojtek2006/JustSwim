@@ -30,7 +30,6 @@
             </thead>
             <tbody>
                 @foreach ($contenders as $contender)
-
                     <tr>
                         <th class="scope-row">{{ $loop->iteration }}</th>
                         <td>{{ $contender->name }}</td>
@@ -42,10 +41,9 @@
                 @endforeach
             </tbody>
         </table>
-@endsection
+    @endsection
 
     @section('extras')
-
         <div class="modal fade" id="contender-create-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
@@ -54,7 +52,7 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Dodaj Zawodnika</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{route("createContender")}}" method="POST">
+                    <form action="{{ route('createContender') }}" method="POST">
                         @csrf
                         <div class="modal-body">
                             <div class="row">
@@ -69,8 +67,8 @@
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Nazwisko</label>
-                                        <input type="text" name="last_name" id="contender-add-surname" class="form-control "
-                                            placeholder="" aria-describedby="helpId" />
+                                        <input type="text" name="last_name" id="contender-add-surname"
+                                            class="form-control " placeholder="" aria-describedby="helpId" />
                                         <!-- <small id="helpId" class="text-muted">Help text</small> -->
                                     </div>
                                 </div>
@@ -88,12 +86,12 @@
                                     <label for="" class="form-label">Płeć</label>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="contender-add-gender" value="K"
+                                        <input class="form-check-input" type="radio" name="gender" value="K"
                                             id="" />
                                         <label class="form-check-label" for="gender"> Kobieta </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="contender-add-gender" value="M"
+                                        <input class="form-check-input" type="radio" name="gender" value="M"
                                             id="" checked />
                                         <label class="form-check-label" for="gender"> Mężczyzna </label>
                                     </div>
@@ -102,12 +100,12 @@
                                     <label for="" class="form-label">Status</label>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="contender-add-status" value="C"
+                                        <input class="form-check-input" type="radio" name="status" value="C"
                                             id="" checked />
                                         <label class="form-check-label" for="status"> Cywil </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="contender-add-status" value="W"
+                                        <input class="form-check-input" type="radio" name="status" value="W"
                                             id="" />
 
                                         <label class="form-check-label" for="status"> Wojskowy </label>

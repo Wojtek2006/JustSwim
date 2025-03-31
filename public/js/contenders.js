@@ -2,8 +2,8 @@ $(document).ready(() => {
     const $nameInput = $("#contender-add-name");
     const $surnameInput = $("#contender-add-surname");
     const $gradeInput = $("#contender-add-grade");
-    const $genderRadios = $("input[name='contender-add-gender']");
-    const $statusRadios = $("input[name='contender-add-status']");
+    const $genderRadios = $("input[name='gender']");
+    const $statusRadios = $("input[name='status']");
     const $saveButton = $("#contender-add-save-button");
 
     function isFormValid() {
