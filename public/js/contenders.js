@@ -47,10 +47,4 @@ $(document).ready(() => {
     // Initialize button state
     toggleSaveButton();
     // console.log("contenders.js loaded");
-
-    $saveButton.on("click", (event) => {
-        event.preventDefault();
-        // alert("Contender added!");
-        // TODO: dodawanie zawodnika do bazy danych
-    });
 });

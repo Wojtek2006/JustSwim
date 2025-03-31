@@ -24,9 +24,4 @@ $(document).ready(() => {
 
     // Initialize button state
     toggleSaveButton();
-
-    $saveButton.on("click", (event) => {
-        event.preventDefault();
-        // TODO: dodawanie zawodnika do bazy danych
-    });
 });
