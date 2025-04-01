@@ -9,27 +9,33 @@
         data-bs-target=" #team-create-modal">Dodaj
         drużynę</button>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Nazwa</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($teams as $team)
-                <tr>
-                    <td>{{ $team->name }}</td>
+    <div class="table-resonsive">
+        <table class="table table-hover">
+            <thead>
+                <caption>
+                    Drużyny
+                </caption>
+                <tr class="table-warning">
+                    <th scope="col">#</th>
+                    <th scope="col">Nazwa</th>
+                    <th scope="col">Skrót</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-
-
+            </thead>
+            <tbody>
+                @foreach ($teams as $team)
+                    <tr>
+                        <th scope="row">{{ $loop->iteration }}</th>
+                        <td>{{ $team->name }}</td>
+                        <td>{{ $team->name }}</td> {{-- TODO: dodać skrót drużyny --}}
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection
 
 
 @section('extras')
-
     <div class="modal fade" id="team-create-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -37,15 +43,15 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Dodaj drużynę</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{route("createTeam")}}" method="POST">
+                <form action="{{ route('createTeam') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="" class="form-label">Nazwa</label>
-                                    <input type="text" name="name" id="team-add-name" class="form-control " placeholder=""
-                                        aria-describedby="helpId" />
+                                    <input type="text" name="name" id="team-add-name" class="form-control "
+                                        placeholder="" aria-describedby="helpId" />
                                 </div>
                             </div>
                             <div class="col">

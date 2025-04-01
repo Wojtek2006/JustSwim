@@ -11,13 +11,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/211f480bf4.js" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="{{asset(" img/favicon.ico")}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
 </head>
 
 <body>
-    @include("partials.navbar")
-    <div class="container text-center">
-        @yield("content")
+    {{-- navbar --}}
+    @include('partials.navbar')
+
+    {{-- precontent (jumbotron) --}}
+    {{-- ? chybya git?? lmao --}}
+    @yield('precontent')
+
+    {{-- content --}}
+    <div class="container text-center my-3">
+        @yield('content')
     </div>
 
     @yield('extras')
