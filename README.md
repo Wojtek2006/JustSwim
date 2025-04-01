@@ -13,7 +13,7 @@ Możliwe że nie wwszystko dodane jeszcze:
 - Dodawanie, wyświetlanie, usuwanie zawodów
   
 
-## [TODO]("./TODO.md")
+## [TODO](TODO.md)
 
 
 ## Instalacja:
