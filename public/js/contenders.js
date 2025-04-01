@@ -1,27 +1,38 @@
+const GRADE_MAX_LENGTH = 3;
+
 $(document).ready(() => {
-    const $nameInput = $("#contender-add-name");
-    const $surnameInput = $("#contender-add-surname");
-    const $gradeInput = $("#contender-add-grade");
-    const $genderRadios = $("input[name='gender']");
-    const $statusRadios = $("input[name='status']");
-    const $saveButton = $("#contender-add-save-button");
+    const $nameInput = $("#fName");
+    const $surnameInput = $("#fSurname");
+    const $gradeInput = $("#fGrade");
+    const $gradeHelp = $("#fGradeHelp");
+    const $genderInputs = $("input:radio[name='gender']"); // * szczerze nie podoba mi się to ale z klasą nie chciało mi działać więc pozoostanie tak :3
+    const $statusInputs = $("input:radio[name='status']"); // * to też
+    const $saveButton = $("#fSaveButton");
 
     function isFormValid() {
         // Check if all required fields are filled and valid
         const nameValid = $nameInput.val().trim() !== "";
         const surnameValid = $surnameInput.val().trim() !== "";
         const gradeValid =
-            $gradeInput.val().trim() !== "" && $gradeInput.length <= 3;
-        const genderValid = $genderRadios.is(":checked");
-        const statusValid = $statusRadios.filter(":checked").length > 0;
+            $gradeInput.val().trim() !== "" &&
+            $gradeInput.length <= GRADE_MAX_LENGTH;
+        const genderValid = $genderInputs.is(":checked");
+        const statusValid = $statusInputs.filter(":checked").length > 0;
 
-        // console.log("Form validation:", {
-        //     nameValid,
-        //     surnameValid,
-        //     genderValid,
-        //     statusValid,
-        //     gradeValid,
-        // }); czarna magia do debugowania
+        // Change according to grade validity
+        if ($gradeInput.val().length <= GRADE_MAX_LENGTH) {
+            $gradeInput.removeClass("text-danger");
+            $gradeInput.removeClass("text-decoration-line-through");
+            $gradeHelp.removeClass("text-danger");
+            $gradeHelp.removeClass("fw-bold");
+            $gradeHelp.addClass("text-muted");
+        } else {
+            $gradeInput.addClass("text-danger");
+            $gradeInput.addClass("text-decoration-line-through");
+            $gradeHelp.addClass("text-danger");
+            $gradeHelp.addClass("fw-bold");
+            $gradeHelp.removeClass("text-muted");
+        }
 
         return (
             nameValid &&
@@ -41,10 +52,9 @@ $(document).ready(() => {
     $nameInput.on("input", toggleSaveButton);
     $surnameInput.on("input", toggleSaveButton);
     $gradeInput.on("input", toggleSaveButton);
-    $genderRadios.on("change", toggleSaveButton);
-    $statusRadios.on("change", toggleSaveButton);
+    $genderInputs.on("change", toggleSaveButton);
+    $statusInputs.on("change", toggleSaveButton);
 
     // Initialize button state
     toggleSaveButton();
-    // console.log("contenders.js loaded");
 });

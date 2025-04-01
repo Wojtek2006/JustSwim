@@ -1,34 +1,25 @@
 $(document).ready(() => {
-    const $compNameInput = $("#fName");
-    const $compDateInput = $("#fDate");
-    const $compStartTimeInput = $("#fStartTime");
+    const $nameInput = $("#fName");
+    const $dateInput = $("#fDate");
+    const $startTimeInput = $("#fStartTime");
     const $saveButton = $("#fSaveButton");
 
     function isFormValid() {
         // Check if all required fields are filled and valid
-        // // * debug magic
-        // // console.log(
-        // //     $compNameInput.val(),
-        // //     $compDateInput.val(),
-        // //     $compStartTimeInput.val()
-        // // );
 
-        const isCompNameValid = $compNameInput.val().trim() !== "";
-        const isCompDateValid = isDateInFuture($compDateInput.val().trim());
-        const isCompStartTimeValid = $compStartTimeInput.val().trim() !== "";
+        const isNameValid = $nameInput.val().trim() !== "";
+        const isDateValid = isDateInFuture($dateInput.val().trim());
+        const isStartTimeValid = $startTimeInput.val().trim() !== "";
 
-        if (isCompDateValid) {
-            $compDateInput.removeClass("text-danger");
-            $compDateInput.removeClass("text-decoration-line-through");
+        if (isDateValid) {
+            $dateInput.removeClass("text-danger");
+            $dateInput.removeClass("text-decoration-line-through");
         } else {
-            $compDateInput.addClass("text-danger");
-            $compDateInput.addClass("text-decoration-line-through");
+            $dateInput.addClass("text-danger");
+            $dateInput.addClass("text-decoration-line-through");
         }
 
-        // // * debug magic
-        //// console.log(isCompNameValid, isCompDateValid, isCompStartTimeValid);
-
-        return isCompNameValid && isCompDateValid && isCompStartTimeValid;
+        return isNameValid && isDateValid && isStartTimeValid;
     }
 
     function toggleSaveButton() {
@@ -38,9 +29,9 @@ $(document).ready(() => {
     }
 
     // Attach event listeners to inputs
-    $compNameInput.on("input", toggleSaveButton);
-    $compDateInput.on("input", toggleSaveButton);
-    $compStartTimeInput.on("input", toggleSaveButton);
+    $nameInput.on("input", toggleSaveButton);
+    $dateInput.on("input", toggleSaveButton);
+    $startTimeInput.on("input", toggleSaveButton);
 
     // Initialize button state
     toggleSaveButton();

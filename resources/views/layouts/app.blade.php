@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JustSwim - {{ $view_title }}</title>
+    <title>JustSwim - {{ $viewTitle }}</title>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
@@ -23,7 +23,11 @@
     @yield('precontent')
 
     {{-- content --}}
-    <div class="container text-center my-3">
+    <div
+        class="@if (isset($containerFluid) && $containerFluid) container-fluid @else container @endif
+        @if (isset($centerText) && $centerText) text-center @endif
+        my-3">
+        {{-- TODO: zmienić na container-fluid i naprawić pozostałe pliki --}}
         @yield('content')
     </div>
 

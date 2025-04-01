@@ -1,16 +1,32 @@
+const CODE_MAX_LENGTH = 5;
+
 $(document).ready(() => {
-    const $teamNameInput = $("#team-add-name");
-    const $teamCodeNameInput = $("#team-add-code-name");
-    const $saveButton = $("#team-add-save-button");
+    const $nameInput = $("#fName");
+    const $codeNameInput = $("#fCodeName");
+    const $codeNameHelp = $("#fCodeNameHelp");
+    const $saveButton = $("#fSaveButton");
 
     function isFormValid() {
         // Check if all required fields are filled and valid
-        const isTeamNameValid = $teamNameInput.val().trim() !== "";
-        const isTeamCodeNameValid =
-            $teamCodeNameInput.val().trim() !== "" &&
-            $teamCodeNameInput.val().length <= 5;
+        const isNameValid = $nameInput.val().trim() !== "";
+        const isCodeNameValid =
+            $codeNameInput.val().trim() !== "" &&
+            $codeNameInput.val().length <= CODE_MAX_LENGTH;
 
-        return isTeamNameValid && isTeamCodeNameValid;
+        if ($codeNameInput.val().length <= CODE_MAX_LENGTH) {
+            $codeNameInput.removeClass("text-danger");
+            $codeNameInput.removeClass("text-decoration-line-through");
+            $codeNameHelp.removeClass("text-danger");
+            $codeNameHelp.removeClass("fw-bold");
+            $codeNameHelp.addClass("text-muted");
+        } else {
+            $codeNameInput.addClass("text-danger");
+            $codeNameInput.addClass("text-decoration-line-through");
+            $codeNameHelp.addClass("text-danger");
+            $codeNameHelp.addClass("fw-bold");
+            $codeNameHelp.removeClass("text-muted");
+        }
+        return isNameValid && isCodeNameValid;
     }
 
     function toggleSaveButton() {
@@ -19,8 +35,8 @@ $(document).ready(() => {
     }
 
     // Attach event listeners to inputs
-    $teamNameInput.on("input", toggleSaveButton);
-    $teamCodeNameInput.on("input", toggleSaveButton);
+    $nameInput.on("input", toggleSaveButton);
+    $codeNameInput.on("input", toggleSaveButton);
 
     // Initialize button state
     toggleSaveButton();

@@ -1,4 +1,4 @@
-@extends('layouts.app', ['view_title' => 'Zawody'])
+@extends('layouts.app', ['viewTitle' => 'Zawody', 'centerText' => true])
 
 @section('content')
     <h1>Zawody</h1>
@@ -62,7 +62,7 @@
                                 <div class="mb-3">
                                     <label for="fName" class="form-label">Nazwa</label>
                                     <input type="text" name="name" id="fName" class="form-control"
-                                        placeholder="Podaj nazwę drużyny" />
+                                        placeholder="Nazwa zawodów" />
                                 </div>
                             </div>
                         </div>
