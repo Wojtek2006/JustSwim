@@ -13,13 +13,7 @@ Możliwe że nie wwszystko dodane jeszcze:
 - Dodawanie, wyświetlanie, usuwanie zawodów
   
 
-## TODO:
-
-- ### landing page [LINK](./resources/views/index.blade.php):
-    - Wyświetlanie najbliższych zawodów
-    - Wyświetlanie statystyk (ile zawodników, drużyn, zawodów dodanych w bazie)
-    - Krótki opis podstron może?? nwm
-- ### wybranie jakiejś ikony logo itd
+## [TODO]("./TODO.md")
 
 
 ## Instalacja:
