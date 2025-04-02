@@ -25,7 +25,6 @@ $(document).ready(() => {
     function toggleSaveButton() {
         // Check if all required fields are filled and enable/disable the button accordingly
         $saveButton.prop("disabled", !isFormValid());
-        console.log("Button state:", isFormValid());
     }
 
     // Attach event listeners to inputs
@@ -44,5 +43,5 @@ function isDateInFuture(dateString) {
     // Set the time of the current date to 00:00:00 to compare only the date part
     currentDate.setHours(0, 0, 0, 0);
 
-    return inputDate > currentDate;
+    return inputDate >= currentDate;
 }

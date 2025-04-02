@@ -1,7 +1,7 @@
 @extends('layouts.app', ['viewTitle' => 'Zawodnicy', 'centerText' => true])
 
 @section('scripts')
-    <script src="{{ asset('js/contenders.js') }}"></script>
+    <script src="{{ asset('./js/contenders.js') }}"></script>
 @endsection
 
 @section('content')
@@ -37,8 +37,30 @@
                         <td>{{ $contender->class }}</td>
                         <td>{{ $contender->gender }}</td>
                         <td>{{ $contender->status }}</td>
-                        <td>Lorem, ipsum.</td> {{-- TODO: drużyna + akcje (usuwanie, zmiana) --}}
-                        <td>Ugghh...</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-tertiary dropdown-toggle border border-tertiary-subtle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    BRAK {{-- TODO: drużyna tutaj :3 --}}
+                                </button>
+                                <ul class="dropdown-menu user-select-none">
+                                    <li><a class="dropdown-item"
+                                            onclick="createToast('Przypisano {{ $contender->name }} {{ $contender->last_name }} do drużyny ...')">Przypisz
+                                            do drużyny</a></li>
+                                    <li><a class="dropdown-item text-danger"
+                                            onclick="createToast('Usunięto {{ $contender->name }} {{ $contender->last_name }} z drużyny ...')">Usuń
+                                            z
+                                            drużyny</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm"
+                                onclick="createToast('Dodano: {{ $contender->name }} {{ $contender->last_name }}');">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -124,4 +146,16 @@
         </div>
     </div>
     {{-- * szczerze myślałem aby dać ale trzeba by jakoś zwrócić dane z forma ze dodano z powoodzeniem, moze jest cos ale nwm --}}
+    <div class="toast-container position-fixed top-0 end-0 p-3" id="toastContainer">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="toastTemplate">
+            <div class="toast-header">
+                <strong class="me-auto">JustSwim</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                See? Just like this.
+            </div>
+        </div>
+
+    </div>
 @endsection
