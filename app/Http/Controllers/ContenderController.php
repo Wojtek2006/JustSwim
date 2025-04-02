@@ -8,7 +8,7 @@ use App\Models\Contender;
 class ContenderController extends Controller
 {
     
-    public function createContender(Request $request) {
+    public function store(Request $request) {
 
         $contender = new Contender;
 
@@ -20,6 +20,12 @@ class ContenderController extends Controller
 
         $contender->save();
 
-        return redirect()->route('contenders');
+        return redirect()->route('contenders')->with('message', 'Użytkownik dodany pomyślnie');
+    }
+
+    public function destroy(Contender $contender) {
+     
+        $contender->delete();
+        return redirect()->route('contenders')->with('message', 'Użytkownik usunięty pomyślnie');    
     }
 }

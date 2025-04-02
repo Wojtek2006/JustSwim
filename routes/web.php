@@ -15,10 +15,11 @@ Route::get('/competitions', [PageController::class, 'competitions'])->name('comp
 
 
 // CONTENDER MODEL SEGMENT
-Route::post('/contenders', [ContenderController::class, 'createContender'])->name('createContender');
+Route::post('/contenders', [ContenderController::class, 'store'])->name('contender.store');
+Route::delete('/contenders/{id}', [ContenderController::class, 'destroy'])->name('contender.destroy');
 
 // COMPETITION MODEL SEGMENT
-Route::post('/competitions', [CompetitionController::class, 'createCompetition'])->name('createCompetition');
+Route::post('/competitions', [CompetitionController::class, 'store'])->name('competition.store');
 
 // TEAM MODEL SEGMENT
-Route::post('/teams', [TeamController::class, 'createTeam'])->name('createTeam');
+Route::post('/teams', [TeamController::class, 'store'])->name('team.store');

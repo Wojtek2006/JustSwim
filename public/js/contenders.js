@@ -1,6 +1,9 @@
 const GRADE_MAX_LENGTH = 3;
 
 $(document).ready(() => {
+
+    
+
     const $nameInput = $("#fName");
     const $surnameInput = $("#fSurname");
     const $gradeInput = $("#fGrade");
@@ -57,4 +60,13 @@ $(document).ready(() => {
 
     // Initialize button state
     toggleSaveButton();
+
+    
+
+});
+
+
+$("#deleteBtn").on("click", function() {
+    let value = $(this).attr("contenderID");
+    alert(value);
 });

@@ -7,7 +7,7 @@ use App\Models\Team;
 
 class TeamController extends Controller
 {
-    public function createTeam(Request $request) {
+    public function store(Request $request) {
 
         $team = new Team;
 
@@ -15,6 +15,6 @@ class TeamController extends Controller
 
         $team->save();
 
-        return redirect()->route('teams');
+        return redirect()->route('teams')->with('message', 'Drużyna dodana pomyślnie');
     }
 }

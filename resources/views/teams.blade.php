@@ -43,7 +43,7 @@
                     <h1 class="modal-title fs-5" id="teamCreateModalLabel">Dodaj drużynę</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('createTeam') }}" method="POST">
+                <form action="{{ route('team.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">

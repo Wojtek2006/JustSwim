@@ -7,7 +7,7 @@ use App\Models\Competition;
 
 class CompetitionController extends Controller
 {
-    public function createCompetition(Request $request) {
+    public function store(Request $request) {
 
         $competition = new Competition;
 
@@ -15,6 +15,6 @@ class CompetitionController extends Controller
 
         $competition->save();
 
-        return redirect()->route('competitions');
+        return redirect()->route('competitions')->with('message', 'Zawody dodane pomyślnie');
     }
 }

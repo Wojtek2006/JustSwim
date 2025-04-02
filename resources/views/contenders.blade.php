@@ -1,16 +1,24 @@
 @extends('layouts.app', ['viewTitle' => 'Zawodnicy', 'centerText' => true])
 
+    {{-- JS scripts --}}
 @section('scripts')
     <script src="{{ asset('js/contenders.js') }}"></script>
 @endsection
+
 
 @section('content')
     <h1>Zawodnicy</h1>
     <p>Lista zawodników</p>
 
+    {{-- Add Contender Btn --}}
     <button type="button" class="btn btn-warning mx-auto d-block w-25 my-4 btn-lg" data-bs-toggle="modal"
-        data-bs-target=" #contenderCreateModal">Dodaj
-        zawodnika</button>
+        data-bs-target=" #contenderCreateModal">
+        Dodaj zawodnika</button>
+    {{-- End Add Contender Btn --}}
+
+
+
+    {{-- Contender Table --}}
     <div class="table-resonsive">
         <table class="table table-hover ">
             <thead>
@@ -38,24 +46,35 @@
                         <td>{{ $contender->gender }}</td>
                         <td>{{ $contender->status }}</td>
                         <td>Lorem, ipsum.</td> {{-- TODO: drużyna + akcje (usuwanie, zmiana) --}}
-                        <td>Ugghh...</td>
+                        <td>
+                            <a class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <button class="btn btn-danger btn-sm" 
+                                    id="deleteBtn"
+                                    contenderID="{{ $contender->id }}" 
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#contenderDeleteModal">
+                            <i class="fa-solid fa-trash-can"></i></button>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+    {{-- End Contender Table --}}
+
 @endsection
 
 @section('extras')
-    <div class="modal fade" id="contenderCreateModal" tabindex="-1" aria-labelledby="contenderCreateModalLabel"
-        aria-hidden="true">
+
+    {{-- Add Contender Modal --}}
+    <div class="modal fade" id="contenderCreateModal" tabindex="-1" aria-labelledby="contenderCreateModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="contenderCreateModalLabel">Dodaj Zawodnika</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('createContender') }}" method="POST">
+                <form action="{{ route('contender.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -123,5 +142,34 @@
             </div>
         </div>
     </div>
+    {{-- Add Contender Modal --}}
+
     {{-- * szczerze myślałem aby dać ale trzeba by jakoś zwrócić dane z forma ze dodano z powoodzeniem, moze jest cos ale nwm --}}
+
+
+    {{-- Delete Contender Modal --}}
+    <div class="modal fade" id="contenderDeleteModal" tabindex="-1" aria-labelledby="contenderDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="contenderDeleteModalLabel">Usuń zawodnika</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Czy na pewno chcesz usunąć tego zawodnika?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+              <form id="deleteUserForm" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Usuń</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{-- End Delete Contender Modal --}}
+    
 @endsection
+

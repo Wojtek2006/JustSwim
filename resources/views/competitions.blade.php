@@ -4,10 +4,15 @@
     <h1>Zawody</h1>
     <p>Lista zawodów</p>
 
-    <button type="button" class="btn btn-warning mx-auto d-block w-25 my-4 btn-lg" data-bs-toggle="modal"
-        data-bs-target=" #competition-create-modal">Dodaj
-        zawody</button>
 
+    {{-- Add Competition Btn  --}}
+    <button type="button" class="btn btn-warning mx-auto d-block w-25 my-4 btn-lg" data-bs-toggle="modal"
+        data-bs-target=" #competition-create-modal">
+        Dodaj zawody</button>
+    {{-- End Add Competition Btn  --}}
+
+
+    {{-- Competition Table --}}
     <table class="table">
         <thead>
             <tr>
@@ -43,9 +48,13 @@
             </tbody>
         </table>
     </div>
+    {{-- End Competition Table --}}
+
 @endsection
 
 @section('extras')
+
+    {{-- Create Competition Modal --}}
     <div class="modal fade" id="competition-create-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
@@ -54,7 +63,7 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Dodaj Zawody</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('createCompetition') }}" method="POST">
+                <form action="{{ route('competition.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -89,8 +98,12 @@
             </div>
         </div>
     </div>
+    {{-- End Create Competition Modal --}}
+
 @endsection
 
+
+    {{-- JS scripts --}}
 @section('scripts')
     <script src="{{ asset('js/competitions.js') }}"></script> {{-- TODO: walidacja danych --}}
 @endsection
