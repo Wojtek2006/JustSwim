@@ -123,4 +123,5 @@
             </div>
         </div>
     </div>
+    {{-- * szczerze myślałem aby dać ale trzeba by jakoś zwrócić dane z forma ze dodano z powoodzeniem, moze jest cos ale nwm --}}
 @endsection

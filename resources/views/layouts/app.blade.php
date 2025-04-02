@@ -19,7 +19,7 @@
     @include('partials.navbar')
 
     {{-- precontent (jumbotron) --}}
-    {{-- ? chybya git?? lmao --}}
+    {{-- chybya git?? lmao --}}
     @yield('precontent')
 
     {{-- content --}}

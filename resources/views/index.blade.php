@@ -1,4 +1,4 @@
-@extends('layouts.app', ['viewTitle' => 'Strona główna', 'centerText' => false, 'containerFluid' => true])
+@extends('layouts.app', ['viewTitle' => 'Strona główna', 'centerText' => false, 'containerFluid' => false])
 
 @section('precontent')
     {{-- jumbotron --}}
@@ -14,12 +14,12 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col">
+    <div class="row row-cols-3">
+        <div class="col-8">
             <h3>Najbliższe zawody: <strong class="text-warning">01-01-1970</strong> o godzinie <strong
                     class="text-warning">00:00</strong></h3>
         </div>
-        <div class="col">
+        <div class="col-4">
             <h3>Zapisane <strong class="text-warning">0</strong> zawodników</h3>
             <h3>Zapisane <strong class="text-warning">0</strong> drużyn</h3>
             <h3>Zapisane <strong class="text-warning">0</strong> zawodów</h3>

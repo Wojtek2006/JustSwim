@@ -3,8 +3,8 @@
         <img src="{{ asset('img/favicon.png') }}" width="30" height="30" class="d-inline-block align-top"
             alt="">
         JustSwim</a>
-    <div class="collapse navbar-collapse" id="collapsibleNavId">
-        <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto">
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('index') }}">Strona główna</a>
             </li>
@@ -20,3 +20,4 @@
         </ul>
     </div>
 </nav>
+{{--  --}}
