@@ -2,7 +2,7 @@
 
     {{-- JS scripts --}}
 @section('scripts')
-    <script src="{{ asset('js/contenders.js') }}"></script>
+    <script src="{{ asset('./js/contenders.js') }}"></script>
 @endsection
 
 
@@ -45,7 +45,24 @@
                         <td>{{ $contender->class }}</td>
                         <td>{{ $contender->gender }}</td>
                         <td>{{ $contender->status }}</td>
-                        <td>Lorem, ipsum.</td> {{-- TODO: drużyna + akcje (usuwanie, zmiana) --}}
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-tertiary dropdown-toggle border border-tertiary-subtle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    BRAK {{-- TODO: drużyna tutaj :3 --}}
+                                </button>
+                                <ul class="dropdown-menu user-select-none">
+                                    <li><a class="dropdown-item"
+                                            onclick="createToast('Przypisano {{ $contender->name }} {{ $contender->last_name }} do drużyny ...')">Przypisz
+                                            do drużyny</a></li>
+                                    <li><a class="dropdown-item text-danger"
+                                            onclick="createToast('Usunięto {{ $contender->name }} {{ $contender->last_name }} z drużyny ...')">Usuń
+                                            z
+                                            drużyny</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
                         <td>
                             <a class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
                             <button class="btn btn-danger btn-sm" 
@@ -54,6 +71,10 @@
                                     data-bs-toggle="modal"
                                     data-bs-target="#contenderDeleteModal">
                             <i class="fa-solid fa-trash-can"></i></button>
+                            {{-- <button type="button" class="btn btn-danger btn-sm"
+                                onclick="createToast('Dodano: {{ $contender->name }} {{ $contender->last_name }}');">
+                                <i class="fa-solid fa-trash"></i>
+                            </button> --}}
                         </td>
                     </tr>
                 @endforeach
@@ -171,5 +192,17 @@
       </div>
     {{-- End Delete Contender Modal --}}
     
+    <div class="toast-container position-fixed top-0 end-0 p-3" id="toastContainer">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="toastTemplate">
+            <div class="toast-header">
+                <strong class="me-auto">JustSwim</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                See? Just like this.
+            </div>
+        </div>
+
+    </div>
 @endsection
 
