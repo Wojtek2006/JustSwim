@@ -24,10 +24,10 @@
     @yield('precontent')
 
     {{-- content --}}
-    <div
-        class="@if (isset($containerFluid) && $containerFluid) container-fluid @else container @endif
+    <div class="@if (isset($containerFluid) && $containerFluid) container-fluid @else container @endif
         @if (isset($centerText) && $centerText) text-center @endif
-        my-3">
+        my-3"
+        overflow-x-scroll>
         @yield('content')
     </div>
 

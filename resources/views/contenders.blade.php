@@ -195,7 +195,8 @@
                 </form>
             </div>
         </div>
-    </div> {{-- * mega dziwne bo tutaj bylo to zamkniecie diva i ja nie wiem do czego jest, ale bez niego nie dziala wiec jest xdd - @vvlfn --}}
+    </div>
+
     {{-- End Delete Contender Modal --}}
 
     {{-- Edit Contender Modal --}}
@@ -284,7 +285,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="contenderAssignTeamModalLabel">Przypisz zawodnika do drużyny</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"><button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
                 </div>
                 <form id="assignToTeamForm" method="POST" action="{{ route('index') }}/contenders">
                     @csrf
@@ -292,7 +293,7 @@
                         <div class="row">
                             <div class="mb-3">
                                 <label for="" class="form-label">Drużyna</label>
-                                <select class="form-select form-select-lg" name="" id="">
+                                <select class="form-select form-select" name="" id="">
                                     <option selected>Wybierz drużynę</option>
                                     {{-- @foreach ($teams as $team)
                                         <option value="{{ $team->id }}">{{ $team->name }}</option>
