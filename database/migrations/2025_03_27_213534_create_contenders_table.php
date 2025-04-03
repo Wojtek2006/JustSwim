@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('class');
             $table->string('gender');
             $table->string('status');
+            $table->integer('team_id')->nullable();
             $table->timestamps();
         });
     }

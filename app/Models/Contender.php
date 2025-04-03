@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contender extends Model
 {
-    protected $fillable = ['name', 'last_name', 'class', 'gender', 'status'];
+    protected $fillable = ['name', 'last_name', 'class', 'gender', 'status', 'team_id'];
 
     /** @use HasFactory<\Database\Factories\ContenderFactory> */
     use HasFactory;
