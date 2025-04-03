@@ -28,7 +28,6 @@
         class="@if (isset($containerFluid) && $containerFluid) container-fluid @else container @endif
         @if (isset($centerText) && $centerText) text-center @endif
         my-3">
-        {{-- TODO: zmienić na container-fluid i naprawić pozostałe pliki --}}
         @yield('content')
     </div>
 
@@ -45,6 +44,13 @@
     {{-- FontAwesome --}}
     <script src="https://kit.fontawesome.com/ccb166a5d5.js" crossorigin="anonymous"></script>
     <script src="{{ asset('./js/app.js') }}"></script>
+    <script>
+        @if (!empty($message))
+            console.log({{ $message }});
+            createToast({{ $message }});
+        @endif
+    </script>
+    {{-- TODO: nie działa :c --}}
     @yield('scripts')
 
 

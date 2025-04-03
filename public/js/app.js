@@ -1,20 +1,17 @@
 function createToast($message) {
+    // Create toast with message in its body element and show it on screen
     // * czarna kurwa magia do pokazywania toast w lewym gornym rogu wtf
     const $toastContainer = $("#toastContainer");
     let $toast = $("#toastTemplate").clone();
     $toast.removeAttr("id");
-    btoast = new bootstrap.Toast($toast);
+    const btoast = new bootstrap.Toast($toast);
     $toast.find(".toast-body").text($message);
     $toast.appendTo($toastContainer);
-    // $toast.addClass("show");
     btoast.show();
     setTimeout(function () {
-        // $toast.removeClass("show");
         btoast.hide();
-        // console.log("shown");
         setTimeout(() => {
             $toast.remove();
-            // console.log("removed");
         }, 300);
     }, 5000);
 }

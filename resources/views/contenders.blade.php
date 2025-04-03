@@ -48,11 +48,15 @@
                             <div class="dropdown">
                                 <button class="btn btn-tertiary dropdown-toggle border border-tertiary-subtle" type="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    BRAK {{-- TODO: drużyna tutaj :3 --}}
+                                    @if ($contender->team_id == null)
+                                        BRAK
+                                    @else
+                                        {{ $contender->team_id }} {{-- TODO: skrót drużyny --}}
+                                    @endif
                                 </button>
                                 <ul class="dropdown-menu user-select-none">
-                                    <li><a class="dropdown-item"
-                                            onclick="createToast('Przypisano {{ $contender->id }} do drużyny ...')">Przypisz
+                                    <li><a class="dropdown-item" data-bs-target="#contenderAssignTeamModal"
+                                            data-bs-toggle="modal">Przypisz
                                             do drużyny</a></li>
                                     <li><a class="dropdown-item text-danger"
                                             onclick="createToast('Usunięto {{ $contender->name }} {{ $contender->last_name }} z drużyny ...')">Usuń
@@ -172,7 +176,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="contenderDeleteModalLabel">Usuń zawodnika</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"><button>
                 </div>
                 <form id="deleteUserForm" method="POST" action="{{ route('index') }}/contenders">
                     @csrf
@@ -187,10 +191,10 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
                         <button type="submit" class="btn btn-danger" id="fDelButton">Usuń</button>
+                    </div>
                 </form>
             </div>
         </div>
-    </div>
     </div> {{-- * mega dziwne bo tutaj bylo to zamkniecie diva i ja nie wiem do czego jest, ale bez niego nie dziala wiec jest xdd - @vvlfn --}}
     {{-- End Delete Contender Modal --}}
 
@@ -200,7 +204,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="contenderEditModalLabel">Dodaj Zawodnika</h1>
+                    <h1 class="modal-title fs-5" id="contenderEditModalLabel">Zmień dane zawodnika</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="editUserForm" action="{{ route('index') }}/contenders" method="POST">
@@ -272,4 +276,40 @@
         </div>
     </div>
     {{-- End Edit Contender Modal --}}
+
+    {{-- Assign to team modal --}}
+    <div class="modal fade" id="contenderAssignTeamModal" tabindex="-1" aria-labelledby="contenderAssignTeamModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contenderAssignTeamModalLabel">Przypisz zawodnika do drużyny</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"><button>
+                </div>
+                <form id="assignToTeamForm" method="POST" action="{{ route('index') }}/contenders">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Drużyna</label>
+                                <select class="form-select form-select-lg" name="" id="">
+                                    <option selected>Wybierz drużynę</option>
+                                    {{-- @foreach ($teams as $team)
+                                        <option value="{{ $team->id }}">{{ $team->name }}</option>
+                                    @endforeach --}}
+                                    {{-- TODO: show teams --}}
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                        <button type="submit" class="btn btn-danger" id="fDelButton">Usuń</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- End Assign to team modal --}}
 @endsection

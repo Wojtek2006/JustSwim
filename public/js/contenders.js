@@ -27,7 +27,6 @@ $(document).ready(() => {
     const $formEdit = $("#editUserForm");
     const formActionEdit = $formEdit.attr("action");
 
-
     function isContenderFormValid(
         $nameInput,
         $surnameInput,
@@ -42,17 +41,8 @@ $(document).ready(() => {
         const gradeValid =
             $gradeInput.val().trim() !== "" &&
             $gradeInput.val().trim().length <= GRADE_MAX_LENGTH; // klasa 1 - GRADE_MAX_LENGTH znaków
-        // const gradeValid = true;
         const genderValid = $genderInputs.is(":checked");
         const statusValid = $statusInputs.filter(":checked").length > 0;
-
-        console.log(
-            nameValid,
-            surnameValid,
-            gradeValid,
-            genderValid,
-            statusValid
-        );
 
         // Change according to grade validity
         if ($gradeInput.val().trim().length <= GRADE_MAX_LENGTH) {
