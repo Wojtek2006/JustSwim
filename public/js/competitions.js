@@ -1,8 +1,15 @@
 $(document).ready(() => {
+    // add modal constants
     const $nameInput = $("#fName");
     const $dateInput = $("#fDate");
     const $startTimeInput = $("#fStartTime");
     const $saveButton = $("#fSaveButton");
+    // del modal constants
+    const $checkboxInputDel = $("#fDelConfirm");
+    const $openModalDel = $(".delOpenModal");
+    const $formDel = $("#deleteCompetitionForm");
+    const formActionDel = $formDel.attr("action");
+
 
     function isFormValid() {
         // Check if all required fields are filled and valid
@@ -34,6 +41,14 @@ $(document).ready(() => {
 
     // Initialize button state
     toggleSaveButton();
+
+
+    $openModalDel.on("click", function () {
+        // set delete route with the correct id (stored in attribute contenderID in DOM)
+        let id = $(this).attr("competitionID");
+        $formDel.attr("action", `${formActionDel}/${id}`);
+        $checkboxInputDel.prop("checked", false);
+    });
 });
 
 function isDateInFuture(dateString) {

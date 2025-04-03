@@ -19,6 +19,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Nazwa</th>
                     <th scope="col">Skrót</th>
+                    <th scope="col">Akcja</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,7 +27,17 @@
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $team->name }}</td>
-                        <td>{{ $team->name }}</td> {{-- TODO: dodać skrót drużyny --}}
+                        <td>{{ $team->shortcut }}</td> {{-- TODO: dodać skrót drużyny --}}
+                        <td>
+                            <button class="btn btn-primary btn-sm editOpenModal" teamID="{{ $team->id }}"
+                                teamShortcut="{{ $team->name }}"
+                                data-bs-toggle="modal"
+                                data-bs-target="#teamEditModal">
+                                <i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="btn btn-danger btn-sm delOpenModal" competitionID="{{ $team->id }}"
+                                data-bs-toggle="modal" data-bs-target="#teamDeleteModal">
+                                <i class="fa-solid fa-trash-can"></i></button>
+                            </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -57,7 +68,7 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="fCodeName" class="form-label">Skrót</label>
-                                    <input type="text" name="name" id="fCodeName" class="form-control "
+                                    <input type="text" name="shortcut" id="fCodeName" class="form-control "
                                         placeholder="Skrót drużyny" aria-describedby="fCodeNameHelp" />
                                     <small class="text-muted" id="fCodeNameHelp">Max. 5 znaków</small>
                                 </div>

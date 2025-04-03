@@ -26,7 +26,7 @@ class ContenderController extends Controller
 
     public function destroy(Contender $contender)
     {
-        // weź bo te id to kłuje w oczy jak nie wiem xD
+        
         $contender->delete();
         return redirect()->route('contenders')->with('message', 'Użytkownik ' . $contender->name . ' usunięty pomyślnie');
     }
