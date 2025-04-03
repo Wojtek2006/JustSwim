@@ -7,7 +7,7 @@
     <title>JustSwim - {{ $viewTitle }}</title>
     {{-- JQuery --}}
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
     {{-- Bootsrap 5.0 --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -21,7 +21,6 @@
     @include('partials.navbar')
 
     {{-- precontent (jumbotron) --}}
-    {{-- chybya git?? lmao --}}
     @yield('precontent')
 
     {{-- content --}}
@@ -33,15 +32,19 @@
         @yield('content')
     </div>
 
+    {{-- modals etc. --}}
     @yield('extras')
     @include('partials.toasts')
-    {{-- Bootstrap JS --}}
+
+
+    {{-- JS SETUPS --}}
+    {{-- Bootstrap --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
     {{-- FontAwesome --}}
     <script src="https://kit.fontawesome.com/ccb166a5d5.js" crossorigin="anonymous"></script>
-    <script src="{{asset('./js/app.js')}}"></script>
+    <script src="{{ asset('./js/app.js') }}"></script>
     @yield('scripts')
 
 

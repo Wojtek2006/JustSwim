@@ -1,20 +1,38 @@
 const GRADE_MAX_LENGTH = 3;
 
 $(document).ready(() => {
-    const $nameInput = $("#fName");
-    const $surnameInput = $("#fSurname");
-    const $gradeInput = $("#fGrade");
-    const $gradeHelp = $("#fGradeHelp");
-    const $genderInputs = $("input:radio[name='gender']"); // * szczerze nie podoba mi się to ale z klasą nie chciało mi działać więc pozoostanie tak :3
-    const $statusInputs = $("input:radio[name='status']"); // * to też
-    const $saveButton = $("#fSaveButton");
-    const $delConfirm = $("#fDelConfirm");
-    const $delButton = $("#fDelButton");
-    const $delOpenModal = $(".delOpenModal");
-    const $delForm = $("#deleteUserForm");
-    const delFormBaseAction = $delForm.attr("action");
+    // add modal constants
+    const $nameInputAdd = $("#fAddName");
+    const $surnameInputAdd = $("#fAddSurname");
+    const $gradeInputAdd = $("#fAddGrade");
+    const $gradeHelpAdd = $("#fAddGradeHelp");
+    const $genderInputsAdd = $("input.fAdd:radio[name='gender']"); // *  szczerze nie podoba mi się to ale z klasą nie chciało mi działać więc pozoostanie tak :3 - @vvlfn
+    const $statusInputsAdd = $("input.fAdd:radio[name='status']"); // *  to też - @vvlfn
+    const $saveButtonAdd = $("#fAddSaveButton");
+    // del modal constants
+    const $checkboxInputDel = $("#fDelConfirm");
+    const $saveButtonDel = $("#fDelButton");
+    const $openModalDel = $(".delOpenModal");
+    const $formDel = $("#deleteUserForm");
+    const formActionDel = $formDel.attr("action");
+    // edit modal constants
+    const $nameInputEdit = $("#fEditName");
+    const $surnameInputEdit = $("#fEditSurname");
+    const $gradeInputEdit = $("#fEditGrade");
+    const $gradeHelpEdit = $("#fEditGradeHelp");
+    const $genderInputsEdit = $("input.fEdit:radio[name='gender']");
+    const $statusInputsEdit = $("input.fEdit:radio[name='status']");
+    const $saveButtonEdit = $("#fEditSaveButton");
+    const $openModalEdit = $(".editOpenModal");
 
-    function isFormValid() {
+    function isContenderFormValid(
+        $nameInput,
+        $surnameInput,
+        $gradeInput,
+        $gradeHelp,
+        $genderInputs,
+        $statusInputs
+    ) {
         // Check if all required fields are filled and valid
         const nameValid = $nameInput.val().trim() !== "";
         const surnameValid = $surnameInput.val().trim() !== "";
@@ -48,30 +66,80 @@ $(document).ready(() => {
         );
     }
 
-    function toggleSaveButton() {
+    function toggleSaveButtonAdd() {
         // Check if all required fields are filled and enable/disable the button accordingly
-        $saveButton.prop("disabled", !isFormValid());
+        $saveButtonAdd.prop(
+            "disabled",
+            !isContenderFormValid(
+                $nameInputAdd,
+                $surnameInputAdd,
+                $gradeInputAdd,
+                $gradeHelpAdd,
+                $genderInputsAdd,
+                $statusInputsAdd
+            )
+        );
+    }
+    function toggleSaveButtonEdit() {
+        // Check if all required fields are filled and enable/disable the button accordingly
+        $saveButtonEdit.prop(
+            "disabled",
+            !isContenderFormValid(
+                $nameInputEdit,
+                $surnameInputEdit,
+                $gradeInputEdit,
+                $gradeHelpEdit,
+                $genderInputsEdit,
+                $statusInputsEdit
+            )
+        );
     }
     function toggleDeleteButton() {
-        $delButton.prop("disabled", !$delConfirm.prop("checked"));
+        $saveButtonDel.prop("disabled", !$checkboxInputDel.prop("checked"));
     }
 
-    // Attach event listeners to inputs and radio buttons
-    $nameInput.on("input", toggleSaveButton);
-    $surnameInput.on("input", toggleSaveButton);
-    $gradeInput.on("input", toggleSaveButton);
-    $genderInputs.on("change", toggleSaveButton);
-    $statusInputs.on("change", toggleSaveButton);
-    $delConfirm.on("change", toggleDeleteButton);
+    // add modal listeners
+    $nameInputEdit.on("input", toggleSaveButtonEdit);
+    $surnameInputEdit.on("input", toggleSaveButtonEdit);
+    $gradeInputEdit.on("input", toggleSaveButtonEdit);
+    $genderInputsEdit.on("change", toggleSaveButtonEdit);
+    $statusInputsEdit.on("change", toggleSaveButtonEdit);
+    // del modal listeners
+    $checkboxInputDel.on("change", toggleDeleteButton);
+    // edit modal listeners
+    $nameInputEdit.on("input", toggleSaveButtonEdit);
+    $surnameInputEdit.on("input", toggleSaveButtonEdit);
+    $gradeInputEdit.on("input", toggleSaveButtonEdit);
+    $genderInputsEdit.on("change", toggleSaveButtonEdit);
+    $statusInputsEdit.on("change", toggleSaveButtonEdit);
 
     // Initialize button state
-    toggleSaveButton();
+    toggleSaveButtonAdd();
     toggleDeleteButton();
 
-    $delOpenModal.on("click", function () {
+    $openModalDel.on("click", function () {
         // set delete route with the correct id (stored in attribute contenderID in DOM)
-        let value = $(this).attr("contenderID");
-        $delForm.attr("action", `${delFormBaseAction}/${value}`);
-        $delConfirm.prop("checked", false);
+        let id = $(this).attr("contenderID");
+        $formDel.attr("action", `${formActionDel}/${id}`);
+        $checkboxInputDel.prop("checked", false);
+    });
+
+    $openModalEdit.on("click", function () {
+        let id = $(this).attr("contenderID");
+        let name = $(this).attr("contenderName");
+        let surname = $(this).attr("contenderSurname");
+        let grade = $(this).attr("contenderGrade");
+        let gender = $(this).attr("contenderGender");
+        let status = $(this).attr("contenderStatus");
+        console.log([id, name, surname, grade, gender, status]);
+
+        // $formDel.attr("action", ``); // TODO:
+        createToast([id, name, surname, grade, gender, status]);
+
+        $nameInputEdit.val(name);
+        $surnameInputEdit.val(surname);
+        $gradeInputEdit.val(grade);
+        $genderInputsEdit.filter(`[value="${gender}"]`).prop("checked", true);
+        $statusInputsEdit.filter(`[value="${status}"]`).prop("checked", true);
     });
 });

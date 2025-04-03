@@ -56,14 +56,17 @@
                                             do drużyny</a></li>
                                     <li><a class="dropdown-item text-danger"
                                             onclick="createToast('Usunięto {{ $contender->name }} {{ $contender->last_name }} z drużyny ...')">Usuń
-                                            z
-                                            drużyny</a>
-                                    </li>
+                                            z drużyny</a></li>
                                 </ul>
                             </div>
                         </td>
                         <td>
-                            <a class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <button class="btn btn-primary btn-sm editOpenModal" contenderID="{{ $contender->id }}"
+                                contenderName="{{ $contender->name }}" contenderSurname="{{ $contender->last_name }}"
+                                contenderGrade="{{ $contender->class }}" contenderGender="{{ $contender->gender }}"
+                                contenderStatus="{{ $contender->status }}" data-bs-toggle="modal"
+                                data-bs-target="#contenderEditModal">
+                                <i class="fa-solid fa-pen-to-square"></i></button>
                             <button class="btn btn-danger btn-sm delOpenModal" contenderID="{{ $contender->id }}"
                                 data-bs-toggle="modal" data-bs-target="#contenderDeleteModal">
                                 <i class="fa-solid fa-trash-can"></i></button>
@@ -96,15 +99,15 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="fName" class="form-label">Imię</label>
-                                    <input type="text" name="name" id="fName" class="form-control "
+                                    <label for="fAddName" class="form-label">Imię</label>
+                                    <input type="text" name="name" id="fAddName" class="form-control "
                                         placeholder="Imię zawodnika" />
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="fSurname" class="form-label">Nazwisko</label>
-                                    <input type="text" name="last_name" id="fSurname" class="form-control "
+                                    <label for="fAddSurname" class="form-label">Nazwisko</label>
+                                    <input type="text" name="last_name" id="fAddSurname" class="form-control "
                                         placeholder="Nazwisko zawodnika" />
                                 </div>
                             </div>
@@ -112,39 +115,38 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="fGrade" class="form-label">Klasa</label>
-                                    <input type="text" name="class" id="fGrade" class="form-control "
-                                        placeholder="Klasa zawodnika" aria-describedby="fGradeHelp" />
-                                    <small id="fGradeHelp" class="text-muted">Max. 3 znaki</small>
+                                    <label for="fAddGrade" class="form-label">Klasa</label>
+                                    <input type="text" name="class" id="fAddGrade" class="form-control "
+                                        placeholder="Klasa zawodnika" aria-describedby="fAddGradeHelp" />
+                                    <small id="fAddGradeHelp" class="text-muted">Max. 3 znaki</small>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
-
                                     <label class="form-label">Płeć</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender" value="K" />
-                                        <label class="form-check-label" for="gender"> Kobieta </label>
+                                        <input class="form-check-input fAdd" type="radio" name="gender" value="K" />
+                                        <label class="form-check-label fAdd" for="gender"> Kobieta </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender" value="M"
+                                        <input class="form-check-input fAdd" type="radio" name="gender" value="M"
                                             checked />
-                                        <label class="form-check-label" for="gender"> Mężczyzna </label>
+                                        <label class="form-check-label fAdd" for="gender"> Mężczyzna </label>
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
-
                                     <label class="form-label">Status</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="status" value="C"
-                                            checked />
-                                        <label class="form-check-label" for="status"> Cywil </label>
+                                        <input class="form-check-input fAdd" type="radio" name="status"
+                                            value="C" checked />
+                                        <label class="form-check-label fAdd" for="status"> Cywil </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="status" value="W" />
-                                        <label class="form-check-label" for="status"> Wojskowy </label>
+                                        <input class="form-check-input fAdd" type="radio" name="status"
+                                            value="W" />
+                                        <label class="form-check-label fAdd" for="status"> Wojskowy </label>
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +154,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
-                        <button type="submit" class="btn btn-primary" id="fSaveButton">Zapisz</button>
+                        <button type="submit" class="btn btn-primary" id="fAddSaveButton">Zapisz</button>
                     </div>
                 </form>
             </div>
@@ -189,6 +191,85 @@
             </div>
         </div>
     </div>
-    </div>
+    </div> {{-- * mega dziwne bo tutaj bylo to zamkniecie diva i ja nie wiem do czego jest, ale bez niego nie dziala wiec jest xdd - @vvlfn --}}
     {{-- End Delete Contender Modal --}}
+
+    {{-- Edit Contender Modal --}}
+    <div class="modal fade" id="contenderEditModal" tabindex="-1" aria-labelledby="contenderEditModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="contenderEditModalLabel">Dodaj Zawodnika</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('{{-- TODO: ROUTE --}}') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="fEditName" class="form-label">Imię</label>
+                                    <input type="text" name="name" id="fEditName" class="form-control "
+                                        placeholder="Imię zawodnika" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="fEditSurname" class="form-label">Nazwisko</label>
+                                    <input type="text" name="last_name" id="fEditSurname" class="form-control "
+                                        placeholder="Nazwisko zawodnika" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="fEditGrade" class="form-label">Klasa</label>
+                                    <input type="text" name="class" id="fEditGrade" class="form-control "
+                                        placeholder="Klasa zawodnika" aria-describedby="fEditGradeHelp" />
+                                    <small id="fEditGradeHelp" class="text-muted">Max. 3 znaki</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label class="form-label">Płeć</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input fEdit" type="radio" name="gender"
+                                            value="K" />
+                                        <label class="form-check-label fEdit" for="gender"> Kobieta </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input fEdit" type="radio" name="gender"
+                                            value="M" checked />
+                                        <label class="form-check-label fEdit" for="gender"> Mężczyzna </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label class="form-label">Status</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input fEdit" type="radio" name="status"
+                                            value="C" checked />
+                                        <label class="form-check-label fEdit" for="status"> Cywil </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input fEdit" type="radio" name="status"
+                                            value="W" />
+                                        <label class="form-check-label fEdit" for="status"> Wojskowy </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                        <button type="submit" class="btn btn-primary" id="fEditSaveButton">Zapisz</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- End Edit Contender Modal --}}
 @endsection
