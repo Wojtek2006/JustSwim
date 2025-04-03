@@ -203,7 +203,7 @@
                     <h1 class="modal-title fs-5" id="contenderEditModalLabel">Dodaj Zawodnika</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('{{-- TODO: ROUTE --}}') }}" method="POST">
+                <form action="{{ route('contenders') }} method="POST"> {{-- TODO: ROUTE --}}
                     @csrf
                     <div class="modal-body">
                         <div class="row">
