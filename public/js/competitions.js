@@ -10,7 +10,6 @@ $(document).ready(() => {
     const $formDel = $("#deleteCompetitionForm");
     const formActionDel = $formDel.attr("action");
 
-
     function isFormValid() {
         // Check if all required fields are filled and valid
 
@@ -42,7 +41,6 @@ $(document).ready(() => {
     // Initialize button state
     toggleSaveButton();
 
-
     $openModalDel.on("click", function () {
         // set delete route with the correct id (stored in attribute contenderID in DOM)
         let id = $(this).attr("competitionID");
@@ -58,5 +56,5 @@ function isDateInFuture(dateString) {
     // Set the time of the current date to 00:00:00 to compare only the date part
     currentDate.setHours(0, 0, 0, 0);
 
-    return inputDate >= currentDate;
+    return inputDate > currentDate;
 }

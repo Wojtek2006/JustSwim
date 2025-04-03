@@ -8,7 +8,6 @@
 
 @section('content')
     <h1>Zawodnicy</h1>
-
     {{-- Add Contender Btn --}}
     <button type="button" class="btn btn-warning mx-auto d-block w-25 my-4 btn-lg" data-bs-toggle="modal"
         data-bs-target=" #contenderCreateModal">
@@ -51,7 +50,11 @@
                                     @if ($contender->team_id == null)
                                         BRAK
                                     @else
-                                        {{ $contender->team_id }} {{-- TODO: skrót drużyny --}}
+                                        @if (App\Models\Team::find($contender->team_id) == null)
+                                            BRAK / NULL
+                                        @else
+                                            {{ App\Models\Team::find($contender->team_id)->shortcut }}
+                                        @endif {{-- TODO: LEPIEJ TO ZROBVIĆ --}}
                                     @endif
                                 </button>
                                 <ul class="dropdown-menu user-select-none">
@@ -295,10 +298,10 @@
                                 <label for="" class="form-label">Drużyna</label>
                                 <select class="form-select form-select" name="" id="">
                                     <option selected>Wybierz drużynę</option>
-                                    {{-- @foreach ($teams as $team)
+                                    @foreach (App\Models\Team::all('id', 'name') as $team)
                                         <option value="{{ $team->id }}">{{ $team->name }}</option>
-                                    @endforeach --}}
-                                    {{-- TODO: show teams --}}
+                                    @endforeach
+                                    {{-- * weź sprawdź wojtek czy to jest moralne wedlug laravel - @vvlfn --}}
                                 </select>
                             </div>
 
@@ -306,7 +309,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
-                        <button type="submit" class="btn btn-danger" id="fDelButton">Usuń</button>
+                        <button type="submit" class="btn btn-primary" id="fDelButton">Przypisz</button>
                     </div>
                 </form>
             </div>

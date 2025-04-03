@@ -9,23 +9,27 @@ use App\Models\Team;
 
 class PageController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('index');
     }
 
-    public function contenders() {
+    public function contenders()
+    {
         $contenders = Contender::all();
 
         return view('contenders', ['contenders' => $contenders]);
     }
 
-    public function teams() {
+    public function teams()
+    {
         $teams = Team::all();
 
         return view('teams', ['teams' => $teams]);
     }
 
-    public function competitions() {
+    public function competitions()
+    {
         $competitions = Competition::all();
 
         return view('competitions', ['competitions' => $competitions]);
