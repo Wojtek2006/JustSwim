@@ -8,7 +8,6 @@
 
 @section('content')
     <h1>Zawodnicy</h1>
-    <p>Lista zawodników</p>
 
     {{-- Add Contender Btn --}}
     <button type="button" class="btn btn-warning mx-auto d-block w-25 my-4 btn-lg" data-bs-toggle="modal"
@@ -53,7 +52,7 @@
                                 </button>
                                 <ul class="dropdown-menu user-select-none">
                                     <li><a class="dropdown-item"
-                                            onclick="createToast('Przypisano {{ $contender->name }} {{ $contender->last_name }} do drużyny ...')">Przypisz
+                                            onclick="createToast('Przypisano {{$contender->id}} do drużyny ...')">Przypisz
                                             do drużyny</a></li>
                                     <li><a class="dropdown-item text-danger"
                                             onclick="createToast('Usunięto {{ $contender->name }} {{ $contender->last_name }} z drużyny ...')">Usuń
@@ -65,8 +64,7 @@
                         </td>
                         <td>
                             <a class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <button class="btn btn-danger btn-sm" 
-                                    id="deleteBtn"
+                            <button class="btn btn-danger btn-sm delOpenModal" 
                                     contenderID="{{ $contender->id }}" 
                                     data-bs-toggle="modal"
                                     data-bs-target="#contenderDeleteModal">
@@ -163,7 +161,7 @@
             </div>
         </div>
     </div>
-    {{-- Add Contender Modal --}}
+    {{-- End Add Contender Modal --}}
 
     {{-- * szczerze myślałem aby dać ale trzeba by jakoś zwrócić dane z forma ze dodano z powoodzeniem, moze jest cos ale nwm --}}
 
@@ -176,15 +174,18 @@
               <h5 class="modal-title" id="contenderDeleteModalLabel">Usuń zawodnika</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form id="deleteUserForm" method="POST" action="{{route('index')}}/contenders">
+                @csrf
+            @method('DELETE')
             <div class="modal-body">
-              <p>Czy na pewno chcesz usunąć tego zawodnika?</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="" />
+                    <label class="form-check-label" for="fDelConfirm"> Czy na pewno chcesz usunąć tego zawodnika? </label>
+                </div>                
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
-              <form id="deleteUserForm" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">Usuń</button>
+                <button type="submit" class="btn btn-danger" id="fDelButton">Usuń</button>
               </form>
             </div>
           </div>
@@ -192,17 +193,6 @@
       </div>
     {{-- End Delete Contender Modal --}}
     
-    <div class="toast-container position-fixed top-0 end-0 p-3" id="toastContainer">
-        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="toastTemplate">
-            <div class="toast-header">
-                <strong class="me-auto">JustSwim</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                See? Just like this.
-            </div>
-        </div>
 
-    </div>
 @endsection
 

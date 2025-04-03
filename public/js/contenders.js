@@ -1,9 +1,6 @@
 const GRADE_MAX_LENGTH = 3;
 
 $(document).ready(() => {
-
-    
-
     const $nameInput = $("#fName");
     const $surnameInput = $("#fSurname");
     const $gradeInput = $("#fGrade");
@@ -11,6 +8,11 @@ $(document).ready(() => {
     const $genderInputs = $("input:radio[name='gender']"); // * szczerze nie podoba mi się to ale z klasą nie chciało mi działać więc pozoostanie tak :3
     const $statusInputs = $("input:radio[name='status']"); // * to też
     const $saveButton = $("#fSaveButton");
+    const $delConfirm = $("fDelConfirm");
+    const $delButton = $("fDelButton");
+    const $delOpenModal = $(".delOpenModal");
+    const $delForm = $("#deleteUserForm");
+    const delFormBaseAction = $delForm.attr("action");
 
     function isFormValid() {
         // Check if all required fields are filled and valid
@@ -61,36 +63,22 @@ $(document).ready(() => {
     // Initialize button state
     toggleSaveButton();
 
-    
+    $delOpenModal.on("click", function () {
+        let value = $(this).attr("contenderID");
+        createToast(value);
+        // $("#deleteUserForm").attr(
+        //     "action",
+        //     `${$("#deleteUserForm").attr()},${value}`
+        // );
+        $delForm.attr("action", `${delFormBaseAction}/${value}`);
 
+        // * fajnie by było ale niestety od razu po tym jest refresh strony więc znika :/
+        //// $saveButton.on("click", function () {
+        ////     createToast(`Dodano: ${$nameInput.val()} ${$surnameInput.val()}`);
+        //// });
+    });
+    $delConfirm.on("click", function () {
+        // if ($delConfirm.checked())
+        createToast("set");
+    });
 });
-
-
-$("#deleteBtn").on("click", function() {
-    let value = $(this).attr("contenderID");
-    alert(value);
-    // * fajnie by było ale niestety od razu po tym jest refresh strony więc znika :/
-    //// $saveButton.on("click", function () {
-    ////     createToast(`Dodano: ${$nameInput.val()} ${$surnameInput.val()}`);
-    //// });
-});
-function createToast($message) {
-    // * czarna kurwa magia do pokazywania toast w lewym gornym rogu wtf
-    const $toastContainer = $("#toastContainer");
-    let $toast = $("#toastTemplate").clone();
-    $toast.removeAttr("id");
-    btoast = new bootstrap.Toast($toast);
-    $toast.find(".toast-body").text($message);
-    $toast.appendTo($toastContainer);
-    // $toast.addClass("show");
-    btoast.show();
-    setTimeout(function () {
-        // $toast.removeClass("show");
-        btoast.hide();
-        // console.log("shown");
-        setTimeout(() => {
-            $toast.remove();
-            // console.log("removed");
-        }, 300);
-    }, 5000);
-}

@@ -18,6 +18,9 @@
                 <a class="nav-link" href="{{ route('competitions') }}">Zawody</a>
             </li>
         </ul>
+        <a href="https://zst.pila.pl/" target="_blank">
+            <img src="{{asset("./img/mechanik.png")}}" width="30" style="filter: invert(100)">
+        </a>
     </div>
 </nav>
 {{--  --}}

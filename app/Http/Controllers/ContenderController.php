@@ -7,8 +7,9 @@ use App\Models\Contender;
 
 class ContenderController extends Controller
 {
-    
-    public function store(Request $request) {
+
+    public function store(Request $request)
+    {
 
         $contender = new Contender;
 
@@ -20,12 +21,14 @@ class ContenderController extends Controller
 
         $contender->save();
 
-        return redirect()->route('contenders')->with('message', 'Użytkownik dodany pomyślnie');
+        return redirect()->route('contenders')->with('message', 'Użytkownik ' . $contender->name .  ' dodany pomyślnie');
     }
 
-    public function destroy(Contender $contender) {
-     
-        $contender->delete();
-        return redirect()->route('contenders')->with('message', 'Użytkownik usunięty pomyślnie');    
+    public function destroy(Contender $id)
+    {
+        // ! $id odnosi się do id zawodnika do usunięcia
+        // dd($id->id);
+        $id->delete();
+        return redirect()->route('contenders')->with('message', 'Użytkownik ' . $id->name .  ' usunięty pomyślnie');
     }
 }
