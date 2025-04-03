@@ -24,6 +24,9 @@ $(document).ready(() => {
     const $statusInputsEdit = $("input.fEdit:radio[name='status']");
     const $saveButtonEdit = $("#fEditSaveButton");
     const $openModalEdit = $(".editOpenModal");
+    const $formEdit = $("#editUserForm");
+    const formActionEdit = $formEdit.attr("action");
+
 
     function isContenderFormValid(
         $nameInput,
@@ -133,7 +136,7 @@ $(document).ready(() => {
         let status = $(this).attr("contenderStatus");
         console.log([id, name, surname, grade, gender, status]);
 
-        // $formDel.attr("action", ``); // TODO:
+        $formEdit.attr("action", `${formActionEdit}/${id}`);
         createToast([id, name, surname, grade, gender, status]);
 
         $nameInputEdit.val(name);

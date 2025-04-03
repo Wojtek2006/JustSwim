@@ -24,11 +24,23 @@ class ContenderController extends Controller
         return redirect()->route('contenders')->with('message', 'Użytkownik ' . $contender->name .  ' dodany pomyślnie');
     }
 
-    public function destroy(Contender $id)
+    public function destroy(Contender $contender)
     {
-        // ! $id odnosi się do id zawodnika do usunięcia
-        // dd($id->id);
-        $id->delete();
-        return redirect()->route('contenders')->with('message', 'Użytkownik ' . $id->name .  ' usunięty pomyślnie');
+        // weź bo te id to kłuje w oczy jak nie wiem xD
+        $contender->delete();
+        return redirect()->route('contenders')->with('message', 'Użytkownik ' . $contender->name .  ' usunięty pomyślnie');
+    }
+
+    public function update(Request $request, Contender $contender) {
+
+        $contender->name = $request->name;
+        $contender->last_name = $request->last_name;
+        $contender->class = $request->class;
+        $contender->gender = $request->gender;
+        $contender->status = $request->status;
+        
+        $contender->save();
+
+        return redirect()->route('contenders')->with('message', 'Użytkownik ' . $contender->name . ' zmieniony pomyślnie');
     }
 }
