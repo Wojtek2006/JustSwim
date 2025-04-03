@@ -42,11 +42,20 @@ $(document).ready(() => {
         const gradeValid =
             $gradeInput.val().trim() !== "" &&
             $gradeInput.val().trim().length <= GRADE_MAX_LENGTH; // klasa 1 - GRADE_MAX_LENGTH znaków
+        // const gradeValid = true;
         const genderValid = $genderInputs.is(":checked");
         const statusValid = $statusInputs.filter(":checked").length > 0;
 
+        console.log(
+            nameValid,
+            surnameValid,
+            gradeValid,
+            genderValid,
+            statusValid
+        );
+
         // Change according to grade validity
-        if ($gradeInput.val().length <= GRADE_MAX_LENGTH) {
+        if ($gradeInput.val().trim().length <= GRADE_MAX_LENGTH) {
             $gradeInput.removeClass("text-danger");
             $gradeInput.removeClass("text-decoration-line-through");
             $gradeHelp.removeClass("text-danger");
@@ -102,11 +111,11 @@ $(document).ready(() => {
     }
 
     // add modal listeners
-    $nameInputEdit.on("input", toggleSaveButtonEdit);
-    $surnameInputEdit.on("input", toggleSaveButtonEdit);
-    $gradeInputEdit.on("input", toggleSaveButtonEdit);
-    $genderInputsEdit.on("change", toggleSaveButtonEdit);
-    $statusInputsEdit.on("change", toggleSaveButtonEdit);
+    $nameInputAdd.on("input", toggleSaveButtonAdd);
+    $surnameInputAdd.on("input", toggleSaveButtonAdd);
+    $gradeInputAdd.on("input", toggleSaveButtonAdd);
+    $genderInputsAdd.on("change", toggleSaveButtonAdd);
+    $statusInputsAdd.on("change", toggleSaveButtonAdd);
     // del modal listeners
     $checkboxInputDel.on("change", toggleDeleteButton);
     // edit modal listeners
