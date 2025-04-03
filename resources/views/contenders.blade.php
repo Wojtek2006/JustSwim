@@ -1,6 +1,6 @@
 @extends('layouts.app', ['viewTitle' => 'Zawodnicy', 'centerText' => true])
 
-    {{-- JS scripts --}}
+{{-- JS scripts --}}
 @section('scripts')
     <script src="{{ asset('./js/contenders.js') }}"></script>
 @endsection
@@ -52,7 +52,7 @@
                                 </button>
                                 <ul class="dropdown-menu user-select-none">
                                     <li><a class="dropdown-item"
-                                            onclick="createToast('Przypisano {{$contender->id}} do drużyny ...')">Przypisz
+                                            onclick="createToast('Przypisano {{ $contender->id }} do drużyny ...')">Przypisz
                                             do drużyny</a></li>
                                     <li><a class="dropdown-item text-danger"
                                             onclick="createToast('Usunięto {{ $contender->name }} {{ $contender->last_name }} z drużyny ...')">Usuń
@@ -64,11 +64,9 @@
                         </td>
                         <td>
                             <a class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <button class="btn btn-danger btn-sm delOpenModal" 
-                                    contenderID="{{ $contender->id }}" 
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#contenderDeleteModal">
-                            <i class="fa-solid fa-trash-can"></i></button>
+                            <button class="btn btn-danger btn-sm delOpenModal" contenderID="{{ $contender->id }}"
+                                data-bs-toggle="modal" data-bs-target="#contenderDeleteModal">
+                                <i class="fa-solid fa-trash-can"></i></button>
                             {{-- <button type="button" class="btn btn-danger btn-sm"
                                 onclick="createToast('Dodano: {{ $contender->name }} {{ $contender->last_name }}');">
                                 <i class="fa-solid fa-trash"></i>
@@ -80,13 +78,12 @@
         </table>
     </div>
     {{-- End Contender Table --}}
-
 @endsection
 
 @section('extras')
-
     {{-- Add Contender Modal --}}
-    <div class="modal fade" id="contenderCreateModal" tabindex="-1" aria-labelledby="contenderCreateModalLabel" aria-hidden="true">
+    <div class="modal fade" id="contenderCreateModal" tabindex="-1" aria-labelledby="contenderCreateModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -167,32 +164,31 @@
 
 
     {{-- Delete Contender Modal --}}
-    <div class="modal fade" id="contenderDeleteModal" tabindex="-1" aria-labelledby="contenderDeleteModalLabel" aria-hidden="true">
+    <div class="modal fade" id="contenderDeleteModal" tabindex="-1" aria-labelledby="contenderDeleteModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="contenderDeleteModalLabel">Usuń zawodnika</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contenderDeleteModalLabel">Usuń zawodnika</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="deleteUserForm" method="POST" action="{{ route('index') }}/contenders">
+                    @csrf
+                    @method('DELETE')
+                    <div class="modal-body">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="confirm" id="fDelConfirm" />
+                            <label class="form-check-label" for="fDelConfirm"> Czy na pewno chcesz usunąć tego zawodnika?
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                        <button type="submit" class="btn btn-danger" id="fDelButton">Usuń</button>
+                </form>
             </div>
-            <form id="deleteUserForm" method="POST" action="{{route('index')}}/contenders">
-                @csrf
-            @method('DELETE')
-            <div class="modal-body">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="" />
-                    <label class="form-check-label" for="fDelConfirm"> Czy na pewno chcesz usunąć tego zawodnika? </label>
-                </div>                
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
-                <button type="submit" class="btn btn-danger" id="fDelButton">Usuń</button>
-              </form>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
+    </div>
     {{-- End Delete Contender Modal --}}
-    
-
 @endsection
-

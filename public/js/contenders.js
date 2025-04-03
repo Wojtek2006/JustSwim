@@ -8,8 +8,8 @@ $(document).ready(() => {
     const $genderInputs = $("input:radio[name='gender']"); // * szczerze nie podoba mi się to ale z klasą nie chciało mi działać więc pozoostanie tak :3
     const $statusInputs = $("input:radio[name='status']"); // * to też
     const $saveButton = $("#fSaveButton");
-    const $delConfirm = $("fDelConfirm");
-    const $delButton = $("fDelButton");
+    const $delConfirm = $("#fDelConfirm");
+    const $delButton = $("#fDelButton");
     const $delOpenModal = $(".delOpenModal");
     const $delForm = $("#deleteUserForm");
     const delFormBaseAction = $delForm.attr("action");
@@ -20,7 +20,7 @@ $(document).ready(() => {
         const surnameValid = $surnameInput.val().trim() !== "";
         const gradeValid =
             $gradeInput.val().trim() !== "" &&
-            $gradeInput.length <= GRADE_MAX_LENGTH;
+            $gradeInput.val().trim().length <= GRADE_MAX_LENGTH; // klasa 1 - GRADE_MAX_LENGTH znaków
         const genderValid = $genderInputs.is(":checked");
         const statusValid = $statusInputs.filter(":checked").length > 0;
 
@@ -52,6 +52,9 @@ $(document).ready(() => {
         // Check if all required fields are filled and enable/disable the button accordingly
         $saveButton.prop("disabled", !isFormValid());
     }
+    function toggleDeleteButton() {
+        $delButton.prop("disabled", !$delConfirm.prop("checked"));
+    }
 
     // Attach event listeners to inputs and radio buttons
     $nameInput.on("input", toggleSaveButton);
@@ -59,26 +62,16 @@ $(document).ready(() => {
     $gradeInput.on("input", toggleSaveButton);
     $genderInputs.on("change", toggleSaveButton);
     $statusInputs.on("change", toggleSaveButton);
+    $delConfirm.on("change", toggleDeleteButton);
 
     // Initialize button state
     toggleSaveButton();
+    toggleDeleteButton();
 
     $delOpenModal.on("click", function () {
+        // set delete route with the correct id (stored in attribute contenderID in DOM)
         let value = $(this).attr("contenderID");
-        createToast(value);
-        // $("#deleteUserForm").attr(
-        //     "action",
-        //     `${$("#deleteUserForm").attr()},${value}`
-        // );
         $delForm.attr("action", `${delFormBaseAction}/${value}`);
-
-        // * fajnie by było ale niestety od razu po tym jest refresh strony więc znika :/
-        //// $saveButton.on("click", function () {
-        ////     createToast(`Dodano: ${$nameInput.val()} ${$surnameInput.val()}`);
-        //// });
-    });
-    $delConfirm.on("click", function () {
-        // if ($delConfirm.checked())
-        createToast("set");
+        $delConfirm.prop("checked", false);
     });
 });
