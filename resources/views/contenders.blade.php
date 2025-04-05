@@ -47,19 +47,20 @@
                             <div class="dropdown">
                                 <button class="btn btn-tertiary dropdown-toggle border border-tertiary-subtle" type="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{-- * 1. NULL: brak drużyny --}}
+                                    {{-- * 2. 0: drużyna usunięta --}}
+                                    {{-- * 3. !0: drużyna istnieje --}}
                                     @if ($contender->team_id == null)
                                         BRAK
+                                    @elseif (!$teams->contains('id', $contender->team_id))
+                                        BRAK / NULL
                                     @else
-                                        @if (App\Models\Team::find($contender->team_id) == null)
-                                            BRAK / NULL
-                                        @else
-                                            {{ App\Models\Team::find($contender->team_id)->shortcut }}
-                                        @endif {{-- TODO: LEPIEJ TO ZROBVIĆ --}}
-                                    @endif
+                                        {{ $contender->team_shortcut }}
+                                    @endif {{-- TODO: LEPIEJ TO ZROBVIĆ --}}
                                 </button>
                                 <ul class="dropdown-menu user-select-none">
-                                    <li><a class="dropdown-item" data-bs-target="#contenderAssignTeamModal"
-                                            data-bs-toggle="modal">Przypisz
+                                    <li><a class="dropdown-item assignOpenModal" data-bs-target="#contenderAssignTeamModal"
+                                            data-bs-toggle="modal" contenderID="{{ $contender->id }}">Przypisz
                                             do drużyny</a></li>
                                     <li><a class="dropdown-item text-danger"
                                             onclick="createToast('Usunięto {{ $contender->name }} {{ $contender->last_name }} z drużyny ...')">Usuń
@@ -290,18 +291,17 @@
                     <h5 class="modal-title" id="contenderAssignTeamModalLabel">Przypisz zawodnika do drużyny</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
                 </div>
-                <form id="assignToTeamForm" method="POST" action="{{ route('index') }}/contenders">
+                <form id="assignToTeamForm" method="POST" action="{{ route('contenders') }}/contenders">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
                             <div class="mb-3">
                                 <label for="" class="form-label">Drużyna</label>
-                                <select class="form-select form-select" name="" id="">
-                                    <option selected>Wybierz drużynę</option>
-                                    @foreach (App\Models\Team::all('id', 'name') as $team)
+                                <select class="form-select form-select" name="" id="fTeamSelectAssign">
+                                    <option selected value="0">Wybierz drużynę</option>
+                                    @foreach ($teams as $team)
                                         <option value="{{ $team->id }}">{{ $team->name }}</option>
                                     @endforeach
-                                    {{-- * weź sprawdź wojtek czy to jest moralne wedlug laravel - @vvlfn --}}
                                 </select>
                             </div>
 
@@ -309,7 +309,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
-                        <button type="submit" class="btn btn-primary" id="fDelButton">Przypisz</button>
+                        <button type="submit" class="btn btn-primary" id="fAssignSaveButton">Przypisz</button>
                     </div>
                 </form>
             </div>

@@ -16,9 +16,12 @@ class PageController extends Controller
 
     public function contenders()
     {
-        $contenders = Contender::all();
+        $contenders = Contender::leftJoin('teams', 'contenders.team_id', '=', 'teams.id')
+            ->select('contenders.*', 'teams.name as team_name', 'teams.shortcut as team_shortcut')
+            ->get();
 
-        return view('contenders', ['contenders' => $contenders]);
+        $teams = Team::all();
+        return view('contenders', ['contenders' => $contenders], ['teams' => $teams]);
     }
 
     public function teams()

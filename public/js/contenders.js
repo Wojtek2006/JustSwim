@@ -27,6 +27,11 @@ $(document).ready(() => {
     const $formEdit = $("#editUserForm");
     const formActionEdit = $formEdit.attr("action");
 
+    const $teamSelectAssign = $("#fTeamSelectAssign");
+    const $saveButtonAssign = $("#fAssignSaveButton");
+    const $openModalAssign = $(".assignOpenModal");
+    const $formAssignToTeam = $("#assignToTeamForm");
+
     function isContenderFormValid(
         $nameInput,
         $surnameInput,
@@ -99,6 +104,22 @@ $(document).ready(() => {
     function toggleDeleteButton() {
         $saveButtonDel.prop("disabled", !$checkboxInputDel.prop("checked"));
     }
+    function toggleAssignButton() {
+        // console.log($teamSelectAssign.val());
+        if ($teamSelectAssign.val() !== "0") {
+            createToast(
+                $teamSelectAssign.val() +
+                    " - " +
+                    $teamSelectAssign
+                        .find(`option[value="${$teamSelectAssign.val()}"]`)
+                        .text()
+            );
+        }
+        $saveButtonAssign.prop(
+            "disabled",
+            Boolean($teamSelectAssign.val() == "0")
+        );
+    }
 
     // add modal listeners
     $nameInputAdd.on("input", toggleSaveButtonAdd);
@@ -116,23 +137,27 @@ $(document).ready(() => {
     $statusInputsEdit.on("change", toggleSaveButtonEdit);
 
     // Initialize button state
+    $teamSelectAssign.val("0");
+    // assign team modal
+    $teamSelectAssign.on("change", toggleAssignButton);
     toggleSaveButtonAdd();
     toggleDeleteButton();
+    toggleAssignButton();
 
     $openModalDel.on("click", function () {
         // set delete route with the correct id (stored in attribute contenderID in DOM)
-        let id = $(this).attr("contenderID");
+        const id = $(this).attr("contenderID");
         $formDel.attr("action", `${formActionDel}/${id}`);
         $checkboxInputDel.prop("checked", false);
     });
 
     $openModalEdit.on("click", function () {
-        let id = $(this).attr("contenderID");
-        let name = $(this).attr("contenderName");
-        let surname = $(this).attr("contenderSurname");
-        let grade = $(this).attr("contenderGrade");
-        let gender = $(this).attr("contenderGender");
-        let status = $(this).attr("contenderStatus");
+        const id = $(this).attr("contenderID");
+        const name = $(this).attr("contenderName");
+        const surname = $(this).attr("contenderSurname");
+        const grade = $(this).attr("contenderGrade");
+        const gender = $(this).attr("contenderGender");
+        const status = $(this).attr("contenderStatus");
         console.log([id, name, surname, grade, gender, status]);
 
         $formEdit.attr("action", `${formActionEdit}/${id}`);
@@ -143,5 +168,13 @@ $(document).ready(() => {
         $gradeInputEdit.val(grade);
         $genderInputsEdit.filter(`[value="${gender}"]`).prop("checked", true);
         $statusInputsEdit.filter(`[value="${status}"]`).prop("checked", true);
+    });
+
+    $openModalAssign.on("click", function () {
+        const id = $(this).attr("contenderID");
+        const action = `${$formAssignToTeam.attr("action")}/assignTeam/${id}`;
+        //  const action = id;
+        $formAssignToTeam.attr("action", action);
+        createToast(id + " " + action);
     });
 });
