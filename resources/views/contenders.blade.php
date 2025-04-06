@@ -50,10 +50,10 @@
                                     {{-- * 1. NULL: brak drużyny --}}
                                     {{-- * 2. 0: drużyna usunięta --}}
                                     {{-- * 3. !0: drużyna istnieje --}}
-                                    @if ($contender->team_id == null)
+                                    @if ($contender->team_id == null or !$teams->contains('id', $contender->team_id))
                                         BRAK
-                                    @elseif (!$teams->contains('id', $contender->team_id))
-                                        BRAK / NULL
+                                        {{-- @elseif ()
+                                        BRAK / NULL --}}
                                     @else
                                         {{ $contender->team_shortcut }}
                                     @endif {{-- TODO: LEPIEJ TO ZROBVIĆ --}}
