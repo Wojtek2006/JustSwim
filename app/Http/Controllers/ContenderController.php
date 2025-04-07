@@ -44,4 +44,20 @@ class ContenderController extends Controller
 
         return redirect()->route('contenders')->with('message', 'Użytkownik ' . $contender->name . ' zmieniony pomyślnie');
     }
+
+    public function assignTeam(Request $request, Contender $contender){
+        $contender->team_id = $request->team_id;
+        
+        $contender->save();
+        
+        return redirect()->route('contenders')->with('message', 'Użytkownik ' . $contender->name . ' przypisany do drużyny');    
+    }
+
+    public function unassignTeam(Contender $contender){
+        $contender->team_id = null;
+        $contender->save();
+
+        return redirect()->route('contenders')->with('message', 'Użytkownik ' . $contender->name . ' usunięty z drużyny');    
+        
+    }
 }

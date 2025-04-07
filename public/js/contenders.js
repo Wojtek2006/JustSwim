@@ -32,6 +32,12 @@ $(document).ready(() => {
     const $openModalAssign = $(".assignOpenModal");
     const $formAssignToTeam = $("#assignToTeamForm");
 
+    const $checkboxInputUnassign = $("fUnassignConfirm");
+    const $saveButtonUnassign = $("#fUnassignButton");
+    const $openModalUnassign = $(".unassignOpenModal");
+    const $formUnassign = $("#unassignContenderForm");
+    const formActionUnassign = $formUnassign.attr("action");
+
     function isContenderFormValid(
         $nameInput,
         $surnameInput,
@@ -104,16 +110,15 @@ $(document).ready(() => {
     function toggleDeleteButton() {
         $saveButtonDel.prop("disabled", !$checkboxInputDel.prop("checked"));
     }
+    function toggleUnassignButton() {
+        $saveButtonUnassign.prop(
+            "disabled",
+            !$checkboxInputUnassign.prop("checked")
+        );
+    }
     function toggleAssignButton() {
         // console.log($teamSelectAssign.val());
         if ($teamSelectAssign.val() !== "0") {
-            createToast(
-                $teamSelectAssign.val() +
-                    " - " +
-                    $teamSelectAssign
-                        .find(`option[value="${$teamSelectAssign.val()}"]`)
-                        .text()
-            );
         }
         $saveButtonAssign.prop(
             "disabled",
@@ -129,6 +134,7 @@ $(document).ready(() => {
     $statusInputsAdd.on("change", toggleSaveButtonAdd);
     // del modal listeners
     $checkboxInputDel.on("change", toggleDeleteButton);
+    $checkboxInputUnassign.on("change", toggleUnassignButton);
     // edit modal listeners
     $nameInputEdit.on("input", toggleSaveButtonEdit);
     $surnameInputEdit.on("input", toggleSaveButtonEdit);
@@ -158,10 +164,10 @@ $(document).ready(() => {
         const grade = $(this).attr("contenderGrade");
         const gender = $(this).attr("contenderGender");
         const status = $(this).attr("contenderStatus");
-        console.log([id, name, surname, grade, gender, status]);
+        // console.log([id, name, surname, grade, gender, status]);
 
         $formEdit.attr("action", `${formActionEdit}/${id}`);
-        createToast([id, name, surname, grade, gender, status]);
+        // createToast([id, name, surname, grade, gender, status]);
 
         $nameInputEdit.val(name);
         $surnameInputEdit.val(surname);
@@ -172,9 +178,19 @@ $(document).ready(() => {
 
     $openModalAssign.on("click", function () {
         const id = $(this).attr("contenderID");
-        const action = `${$formAssignToTeam.attr("action")}/assignTeam/${id}`;
+        const action = `${$formAssignToTeam.attr("action")}/${id}`;
         //  const action = id;
         $formAssignToTeam.attr("action", action);
-        createToast(id + " " + action);
+        // createToast(id + " " + action);
+    });
+
+    $openModalUnassign.on("click", function () {
+        const id = $(this).attr("contenderID");
+        const action = `${formActionUnassign}/${id}`;
+        // createToast(action);
+        console.log(action);
+        $formUnassign.attr("action", action);
+        // $formUnassign.attr("action", `${formActionUnassign}/${id}`);
+        $checkboxInputUnassign.prop("checked", false);
     });
 });
