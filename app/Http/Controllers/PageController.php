@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Contender;
 use App\Models\Competition;
 use App\Models\Team;
+
+
 
 class PageController extends Controller
 {
@@ -36,5 +39,35 @@ class PageController extends Controller
         $competitions = Competition::all();
 
         return view('competitions', ['competitions' => $competitions]);
+    }
+
+    public function showCompetition(Competition $competition) {
+
+        $teams = [];
+
+        $relations = DB::table('team_competition_relation')
+            ->where('competitionID', '=', $competition->id)
+            ->get();
+
+        foreach($relations as $relation) {
+            $teams[] = DB::table('teams')
+            ->where('id', '=', $relation->teamID)
+            ->select('name', 'shortcut')
+            ->get();
+        }
+
+        return view('showCompetition', ['competition' => $competition, 'teams' => $teams]);
+    }
+
+    public function showTeam(Team $team) {
+
+        $contenders = Contender::where('team_id', $team->id)->get();
+
+        $team = DB::table('teams')
+            ->where('id', '=', $team->id)
+            ->select('name')
+            ->get();
+
+        return view('showTeam', ['contenders' => $contenders, 'team' => $team]);
     }
 }

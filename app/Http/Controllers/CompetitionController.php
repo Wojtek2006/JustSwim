@@ -39,4 +39,5 @@ class CompetitionController extends Controller
 
         return redirect()->route('competitions')->with('message', 'Użytkownik ' . $competition->name . ' zmieniony pomyślnie');
     }
+
 }

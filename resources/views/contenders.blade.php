@@ -80,7 +80,7 @@
                                 data-bs-target="#contenderEditModal">
                                 <i class="fa-solid fa-pen-to-square"></i></button>
                             <button class="btn btn-danger btn-sm delOpenModal" contenderID="{{ $contender->id }}"
-                                data-bs-toggle="modal" data-bs-target="#unnasign">
+                                data-bs-toggle="modal" data-bs-target="#contenderDeleteModal">
                                 <i class="fa-solid fa-trash-can"></i></button>
                             {{-- <button type="button" class="btn btn-danger btn-sm"
                                 onclick="createToast('Dodano: {{ $contender->name }} {{ $contender->last_name }}');">

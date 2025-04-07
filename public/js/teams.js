@@ -5,6 +5,10 @@ $(document).ready(() => {
     const $codeNameInput = $("#fCodeName");
     const $codeNameHelp = $("#fCodeNameHelp");
     const $saveButton = $("#fSaveButton");
+    
+    const $nameInputEdit = $("#fEditName");
+    const $codeNameInputEdit = $("#fEditCodeName");
+
 
     function isFormValid() {
         // Check if all required fields are filled and valid

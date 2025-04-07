@@ -54,6 +54,7 @@
                         <button class="btn btn-danger btn-sm delOpenModal" competitionID="{{ $competition->id }}"
                             data-bs-toggle="modal" data-bs-target="#competitionDeleteModal">
                             <i class="fa-solid fa-trash-can"></i></button>
+                        <a href="{{ route('show.competition', $competition->id) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-magnifying-glass"></i></a>
                         </td>
                     </tr>
                 @endforeach

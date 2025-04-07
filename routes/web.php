@@ -12,6 +12,8 @@ Route::get('/', [PageController::class, 'index'])->name('index');
 Route::get('/contenders', [PageController::class, 'contenders'])->name('contenders');
 Route::get('/teams', [PageController::class, 'teams'])->name('teams');
 Route::get('/competitions', [PageController::class, 'competitions'])->name('competitions');
+Route::get('/showCompetition/{competition}', [PageController::class, 'showCompetition'])->name('show.competition');
+Route::get('/showTeam/{team}', [PageController::class, 'showTeam'])->name('show.team');
 
 
 // CONTENDER MODEL SEGMENT
@@ -27,8 +29,7 @@ Route::delete('/competitions/{competition}', [CompetitionController::class, 'des
 Route::post('/competitions/{competition}', [CompetitionController::class, 'update'])->name('competition.update');
 
 
-
 // TEAM MODEL SEGMENT
 Route::post('/teams', [TeamController::class, 'store'])->name('team.store');
 Route::delete('/teams/{team}', [TeamController::class, 'destroy'])->name('team.destroy');
-Route::post('/teams/{team}', [TeamController::class, 'update'])->name('team.update');
+Route::post('/teams/update/{team}', [TeamController::class, 'update'])->name('team.update');
