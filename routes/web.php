@@ -17,7 +17,9 @@ Route::get('/competitions', [PageController::class, 'competitions'])->name('comp
 // CONTENDER MODEL SEGMENT
 Route::post('/contenders', [ContenderController::class, 'store'])->name('contender.store');
 Route::delete('/contenders/{contender}', [ContenderController::class, 'destroy'])->name('contender.destroy');
-Route::post('/contenders/{contender}', [ContenderController::class, 'update'])->name('contender.update');
+Route::post('/contenders/update/{contender}', [ContenderController::class, 'update'])->name('contender.update');
+Route::post('/contenders/assignTeam/{contender}', [ContenderController::class, 'assignTeam'])->name('contender.assignTeam');
+Route::post('/contenders/unassignTeam/{contender}', [ContenderController::class, 'unassignTeam'])->name('contender.unassignTeam');
 
 // COMPETITION MODEL SEGMENT
 Route::post('/competitions', [CompetitionController::class, 'store'])->name('competition.store');
