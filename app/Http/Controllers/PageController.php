@@ -70,4 +70,8 @@ class PageController extends Controller
 
         return view('showTeam', ['contenders' => $contenders, 'team' => $team]);
     }
+
+    public function generateTracks() {
+        
+    }
 }

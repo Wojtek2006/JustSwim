@@ -20,8 +20,9 @@
         @endforeach
     </tbody>
 
-</table>
+    </table>
 
+    <a type="button" class="btn btn-warning mx-auto d-block w-25 my-4 btn-lg">Generuj Tor</a>
 
 
 @endsection
