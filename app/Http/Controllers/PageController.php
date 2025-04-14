@@ -41,7 +41,8 @@ class PageController extends Controller
         return view('competitions', ['competitions' => $competitions]);
     }
 
-    public function showCompetition(Competition $competition) {
+    public function showCompetition(Competition $competition)
+    {
 
         $teams = [];
 
@@ -49,17 +50,17 @@ class PageController extends Controller
             ->where('competitionID', '=', $competition->id)
             ->get();
 
-        foreach($relations as $relation) {
+        foreach ($relations as $relation) {
             $teams[] = DB::table('teams')
-            ->where('id', '=', $relation->teamID)
-            ->select('name', 'shortcut')
-            ->get();
+                ->where('id', '=', $relation->teamID)
+                ->select('name', 'shortcut', 'id')
+                ->get();
         }
-
         return view('showCompetition', ['competition' => $competition, 'teams' => $teams]);
     }
 
-    public function showTeam(Team $team) {
+    public function showTeam(Team $team)
+    {
 
         $contenders = Contender::where('team_id', $team->id)->get();
 
@@ -71,22 +72,22 @@ class PageController extends Controller
         return view('showTeam', ['contenders' => $contenders, 'team' => $team]);
     }
 
-    public function generateTracks(Competition $competition) {
-        
+    public function generateTracks(Competition $competition)
+    {
+
         $teams = [];
 
         $relations = DB::table('team_competition_relation')
             ->where('competitionID', '=', $competition->id)
             ->get();
 
-        foreach($relations as $relation) {
+        foreach ($relations as $relation) {
             $teams[] = DB::table('teams')
-            ->where('id', '=', $relation->teamID)
-            ->select('id')
-            ->get();
+                ->where('id', '=', $relation->teamID)
+                ->select('id')
+                ->get();
         }
 
         dd($teams);
-
     }
 }

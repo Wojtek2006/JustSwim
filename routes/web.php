@@ -27,6 +27,7 @@ Route::post('/contenders/unassignTeam/{contender}', [ContenderController::class,
 Route::post('/competitions', [CompetitionController::class, 'store'])->name('competition.store');
 Route::delete('/competitions/{competition}', [CompetitionController::class, 'destroy'])->name('competition.destroy');
 Route::post('/competitions/{competition}', [CompetitionController::class, 'update'])->name('competition.update');
+Route::post('/competitions/addTeam/{competition}', [CompetitionController::class, 'addTeam'])->name('competition.addTeam');
 
 
 // TEAM MODEL SEGMENT
