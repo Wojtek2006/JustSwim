@@ -71,7 +71,22 @@ class PageController extends Controller
         return view('showTeam', ['contenders' => $contenders, 'team' => $team]);
     }
 
-    public function generateTracks() {
+    public function generateTracks(Competition $competition) {
         
+        $teams = [];
+
+        $relations = DB::table('team_competition_relation')
+            ->where('competitionID', '=', $competition->id)
+            ->get();
+
+        foreach($relations as $relation) {
+            $teams[] = DB::table('teams')
+            ->where('id', '=', $relation->teamID)
+            ->select('id')
+            ->get();
+        }
+
+        dd($teams);
+
     }
 }

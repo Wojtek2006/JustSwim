@@ -14,7 +14,7 @@ Route::get('/teams', [PageController::class, 'teams'])->name('teams');
 Route::get('/competitions', [PageController::class, 'competitions'])->name('competitions');
 Route::get('/showCompetition/{competition}', [PageController::class, 'showCompetition'])->name('show.competition');
 Route::get('/showTeam/{team}', [PageController::class, 'showTeam'])->name('show.team');
-
+Route::get('/showCompetition/generateTracks/{competition}', [PageController::class, 'generateTracks'])->name('generate.tracks');
 
 // CONTENDER MODEL SEGMENT
 Route::post('/contenders', [ContenderController::class, 'store'])->name('contender.store');
