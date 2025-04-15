@@ -9,6 +9,9 @@ $(document).ready(() => {
     const $nameInputEdit = $("#fEditName");
     const $codeNameInputEdit = $("#fEditCodeName");
 
+    const $openModalDel = $(".delOpenModal");
+
+
 
     function isFormValid() {
         // Check if all required fields are filled and valid
@@ -44,4 +47,13 @@ $(document).ready(() => {
 
     // Initialize button state
     toggleSaveButton();
+
+
+
+    $openModalDel.on("click", function () {
+        // set delete route with the correct id (stored in attribute contenderID in DOM)
+        const id = $(this).attr("contenderID");
+        $formDel.attr("action", `${formActionDel}/${id}`);
+        $checkboxInputDel.prop("checked", false);
+    });
 });

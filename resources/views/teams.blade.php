@@ -120,6 +120,34 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="teamDeleteModal" tabindex="-1" aria-labelledby="teamDeleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="teamDeleteModalLabel">Usuń zawodnika</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"><button>
+                </div>
+                <form id="deleteTeamForm" method="POST" action="{{ route('index') }}/teams">
+                    @csrf
+                    @method('DELETE')
+                    <div class="modal-body">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="confirm" id="fDelConfirm" />
+                            <label class="form-check-label" for="fDelConfirm"> Czy na pewno chcesz usunąć tą drużynę?
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                        <button type="submit" class="btn btn-danger" id="fDelButton">Usuń</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('scripts')
