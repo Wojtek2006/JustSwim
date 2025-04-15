@@ -1,5 +1,9 @@
 @extends('layouts.app', ['viewTitle' => 'Zawody', 'centerText' => true])
 
+@section('scripts')
+    <script src="{{ asset('./js/showCompetition.js') }}"></script>
+@endsection
+
 @section('content')
     <div class="container">
         <a type="button" class="btn btn-warning mx-auto my-4 d-block w-75 btn-lg">Generuj Tor</a>
@@ -26,8 +30,8 @@
                         <td>{{ $team[0]->name }}</td>
                         <td>{{ $team[0]->shortcut }}</td>
                         <td>
-                            <button class="btn btn-danger btn-sm delOpenModal" contenderID="" data-bs-toggle="modal"
-                                data-bs-target="#contenderDeleteModal">
+                            <button class="btn btn-danger btn-sm delTeamOpenModal" data-bs-toggle="modal"
+                                teamID="{{ $team[0]->id }}" data-bs-target="#removeTeamFromCompetitionModal">
                                 <i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
@@ -65,6 +69,34 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
                         <button type="submit" class="btn btn-primary" id="fTeamAddSaveButton">Przypisz</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- delete team from competition --}}
+    <div class="modal fade" id="removeTeamFromCompetitionModal" tabindex="-1"
+        aria-labelledby="removeTeamFromCompetitionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="removeTeamFromCompetitionModalLabel">Usuń drużynę z zawodów</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
+                </div>
+                <form id="removeTeamFromCompetitionForm" method="POST"
+                    action="{{ route('index') }}/competitions/removeTeam/{{ $competition->id }}">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="confirm" id="fUnassignConfirm" />
+                            <label class="form-check-label" for="fUnassignConfirm"> Czy na pewno chcesz usunąć drużynę z
+                                zawodów?
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                        <button type="submit" class="btn btn-danger" id="fUnassignButton">Usuń</button>
                     </div>
                 </form>
             </div>

@@ -28,7 +28,7 @@ Route::post('/competitions', [CompetitionController::class, 'store'])->name('com
 Route::delete('/competitions/{competition}', [CompetitionController::class, 'destroy'])->name('competition.destroy');
 Route::post('/competitions/{competition}', [CompetitionController::class, 'update'])->name('competition.update');
 Route::post('/competitions/addTeam/{competition}', [CompetitionController::class, 'addTeam'])->name('competition.addTeam');
-
+Route::post('/competitions/removeTeam/{competition}/{team}', [CompetitionController::class, 'removeTeam'])->name('competition.removeTeam');
 
 // TEAM MODEL SEGMENT
 Route::post('/teams', [TeamController::class, 'store'])->name('team.store');

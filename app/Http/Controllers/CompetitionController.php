@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Competition;
 use App\Models\Team;
@@ -51,10 +51,20 @@ class CompetitionController extends Controller
 
         return redirect()->route('show.competition', $competition->id)->with('message', 'Drużyna dodana do zawodów');
     }
-
-    public function kickTeam() 
+    public function removeTeam(Competition $competition, Team $team)
     {
-        
+        DB::table('team_competition_relation')
+            ->where('teamID', "=", $team->id)
+            ->where('competitionID', "=", $competition->id)
+            ->delete();
+        // dd($competition->id, $team->id, $del);
+
+        return redirect()->route('show.competition', $competition->id)->with('message', 'Drużyna usunięta z zawodów');
+    }
+
+    public function kickTeam()
+    {
+
     }
 
 }
