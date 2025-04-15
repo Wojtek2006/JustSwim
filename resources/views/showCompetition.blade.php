@@ -20,15 +20,15 @@
                     <th scope="col">Akcja</th>
             </thead>
             <tbody>
-                @foreach ($teams as $team)
+                @foreach ($assignedTeams as $team)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</td>
                         <td>{{ $team[0]->name }}</td>
                         <td>{{ $team[0]->shortcut }}</td>
                         <td>
-                            <button class="btn btn-danger btn-sm delOpenModal" contenderID=""
-                            data-bs-toggle="modal" data-bs-target="#contenderDeleteModal">
-                            <i class="fa-solid fa-trash-can"></i></button>
+                            <button class="btn btn-danger btn-sm delOpenModal" contenderID="" data-bs-toggle="modal"
+                                data-bs-target="#contenderDeleteModal">
+                                <i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
                 @endforeach
@@ -54,7 +54,7 @@
                                 <label for="" class="form-label">Drużyna</label>
                                 <select class="form-select form-select" name="team_id" id="fTeamAddSelect">
                                     <option selected value="0">Wybierz drużynę</option>
-                                    @foreach ($teams[0] as $team)
+                                    @foreach ($availableTeams as $team)
                                         <option value="{{ $team->id }}">{{ $team->name }}</option>
                                     @endforeach
                                 </select>
