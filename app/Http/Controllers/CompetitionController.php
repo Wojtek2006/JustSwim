@@ -48,8 +48,13 @@ class CompetitionController extends Controller
             'teamID' => $request->team_id,
             'competitionID' => $competition->id
         ]);
+
         return redirect()->route('show.competition', $competition->id)->with('message', 'Drużyna dodana do zawodów');
     }
 
+    public function kickTeam() 
+    {
+        
+    }
 
 }

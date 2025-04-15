@@ -7,25 +7,6 @@
             data-bs-target="#competitionAddTeamModal">Dodaj drużynę</button>
     </div>
 
-<<<<<<< HEAD
-<table class="table">
-    <thead>
-        <tr>
-            <td scope="col">#</td>
-            <td scope="col">Nazwa Drużyny</td>
-            <td scope="col">Skrót</td>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($teams as $team)
-            <tr>
-                <td>{{ $loop->iteration}}</td>
-                <td>{{ $team[0]->name }}</td>
-                <td>{{ $team[0]->shortcut }}</td>
-            </tr>
-        @endforeach
-    </tbody>
-=======
     <div class="table-responsive">
         <table class="table-hover table">
             <thead>
@@ -36,6 +17,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Nazwa</th>
                     <th scope="col">Skrót</th>
+                    <th scope="col">Akcja</th>
             </thead>
             <tbody>
                 @foreach ($teams as $team)
@@ -43,13 +25,17 @@
                         <th scope="row">{{ $loop->iteration }}</td>
                         <td>{{ $team[0]->name }}</td>
                         <td>{{ $team[0]->shortcut }}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm delOpenModal" contenderID=""
+                            data-bs-toggle="modal" data-bs-target="#contenderDeleteModal">
+                            <i class="fa-solid fa-trash-can"></i></button>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
 @endsection
->>>>>>> c0080c8 (praca nad dodawaniem druzyn (trzteba insert zrobic w addTeam comptetioncontroller.php)
 
 @section('extras')
     <div class="modal fade" id="competitionAddTeamModal" tabindex="-1" aria-labelledby="competitionAddTeamModalLabel"
@@ -74,12 +60,6 @@
                                 </select>
                             </div>
 
-<<<<<<< HEAD
-    <a type="button" class="btn btn-warning mx-auto d-block w-25 my-4 btn-lg" href="{{ route('generate.tracks', ) }}">Generuj Tory</a>
-
-
-@endsection 
-=======
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -91,4 +71,3 @@
         </div>
     </div>
 @endsection
->>>>>>> c0080c8 (praca nad dodawaniem druzyn (trzteba insert zrobic w addTeam comptetioncontroller.php)
