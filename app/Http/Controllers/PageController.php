@@ -44,19 +44,28 @@ class PageController extends Controller
     public function showCompetition(Competition $competition)
     {
 
-        $teams = [];
+        $assignedTeams = [];
 
         $relations = DB::table('team_competition_relation')
             ->where('competitionID', '=', $competition->id)
             ->get();
 
         foreach ($relations as $relation) {
-            $teams[] = DB::table('teams')
+            $assignedTeams[] = DB::table('teams')
                 ->where('id', '=', $relation->teamID)
                 ->select('name', 'shortcut', 'id')
                 ->get();
         }
-        return view('showCompetition', ['competition' => $competition, 'teams' => $teams]);
+        $availableTeams = [];
+        $assignedTeamIds = array_map(function ($team) {
+            return $team[0]->id;
+        }, $assignedTeams);
+        $availableTeams = DB::table('teams')
+            ->whereNotIn('id', $assignedTeamIds)->select('id', 'name', 'shortcut')->get();
+        // dd('', $availableTeams, $assignedTeamIds);
+
+
+        return view('showCompetition', ['competition' => $competition, 'assignedTeams' => $assignedTeams, 'availableTeams' => $availableTeams]);
     }
 
     public function showTeam(Team $team)
