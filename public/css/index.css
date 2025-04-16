@@ -1,0 +1,6 @@
+.nearestCompetitionButton:hover {
+    transform: translate(15px);
+}
+.nearestCompetitionButton {
+    transition: transform ease-out 0.2s;
+}

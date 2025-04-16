@@ -14,15 +14,31 @@
 @endsection
 
 @section('content')
-    <div class="row row-cols-3">
-        <div class="col-8">
-            <h3>Najbliższe zawody: <strong class="text-warning">01-01-1970</strong> o godzinie <strong
-                    class="text-warning">00:00</strong></h3>
+    <div class="row row-cols-3 gap-5 justify-between">
+        <div class="col mx-auto">
+            <h3 class="text-center">Najbliższe zawody:</h3>
+            <ul class="list-group">
+                @foreach ($nearestCompetitions as $comp)
+                    <a href="{{ route('show.competition', $comp->id) }}"
+                        class="list-group-item list-group-item py-3 nearestCompetitionButton position-relative">
+                        <span class=" fw-bold">{{ $comp->name }}</span>
+                        -
+                        <span class=" fw-bold">{{ $comp->date }}</span>
+                        o godzinie
+                        <span class=" fw-bold">{{ $comp->start_time }}</span>
+                    </a>
+                @endforeach
+            </ul>
         </div>
-        <div class="col-4">
-            <h3>Zapisane <strong class="text-warning">0</strong> zawodników</h3>
-            <h3>Zapisane <strong class="text-warning">0</strong> drużyn</h3>
-            <h3>Zapisane <strong class="text-warning">0</strong> zawodów</h3>
+        <div class="col mx-auto">
+            <h3>Zapisane <strong class="text-warning">{{ $contendersNum }}</strong> zawodników</h3>
+            <h3>Zapisane <strong class="text-warning">{{ $teamsNum }}</strong> drużyn</h3>
+            <h3>Zapisane <strong class="text-warning">{{ $competitionsNum }}</strong> zawodów</h3>
         </div>
     </div>
+@endsection
+
+
+@section('head')
+    <link rel="stylesheet" href="{{ asset('./css/index.css') }}">
 @endsection
