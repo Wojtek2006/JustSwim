@@ -12,7 +12,7 @@
 
     {{-- {{session('message')}} --}}
     {{-- Add Contender Btn --}}
-    <button type="button" class="btn btn-warning mx-auto d-block w-25 my-4 btn-lg" data-bs-toggle="modal"
+    <button type="button" class="btn btn-warning mx-auto d-block my-4 btn-lg" data-bs-toggle="modal"
         data-bs-target=" #contenderCreateModal">
         Dodaj zawodnika</button>
     {{-- End Add Contender Btn --}}
@@ -20,77 +20,88 @@
 
 
     {{-- Contender Table --}}
-    <div class="table-resonsive">
-        <table class="table table-hover ">
-            <thead>
-                <caption>
-                    Zawodnicy
-                </caption>
-                <tr class="table-warning">
-                    <th>#</th>
-                    <th>Imie</th>
-                    <th>Nazwisko</th>
-                    <th>Klasa</th>
-                    <th>Płeć</th>
-                    <th>Status</th>
-                    <th>Drużyna</th>
-                    <th>Akcja</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($contenders as $contender)
-                    <tr>
-                        <th class="scope-row">{{ $loop->iteration }}</th>
-                        <td>{{ $contender->name }}</td>
-                        <td>{{ $contender->last_name }}</td>
-                        <td>{{ $contender->class }}</td>
-                        <td>{{ $contender->gender }}</td>
-                        <td>{{ $contender->status }}</td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-tertiary dropdown-toggle border border-tertiary-subtle"
-                                    type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{-- * 1. NULL: brak drużyny --}}
-                                    {{-- * 2. 0: drużyna usunięta --}}
-                                    {{-- * 3. !0: drużyna istnieje --}}
-                                    @if ($contender->team_id == null or !$teams->contains('id', $contender->team_id))
-                                        BRAK
-                                        {{-- @elseif ()
+    <div class="w-100 overflow-x-scroll">
+
+        <div class="table-resonsive">
+            <table class="table table-hover ">
+                <thead>
+                    <caption>
+                        Zawodnicy
+                    </caption>
+                    <tr class="table-warning">
+                        <th>#</th>
+                        <th>Imie</th>
+                        <th>Nazwisko</th>
+                        <th>Klasa</th>
+                        <th>Płeć</th>
+                        <th>Status</th>
+                        <th>Drużyna</th>
+                        <th>Akcja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($contenders as $contender)
+                        <tr>
+                            <th class="scope-row">{{ $loop->iteration }}</th>
+                            <td>{{ $contender->name }}</td>
+                            <td>{{ $contender->last_name }}</td>
+                            <td>{{ $contender->class }}</td>
+                            <td>{{ $contender->gender }}</td>
+                            <td>{{ $contender->status }}</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-tertiary dropdown-toggle border border-tertiary-subtle"
+                                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{-- * 1. NULL: brak drużyny --}}
+                                        {{-- * 2. 0: drużyna usunięta --}}
+                                        {{-- * 3. !0: drużyna istnieje --}}
+                                        @if ($contender->team_id == null or !$teams->contains('id', $contender->team_id))
+                                            BRAK
+                                            {{-- @elseif ()
                                         BRAK / NULL --}}
-                                    @else
-                                        {{ $contender->team_shortcut }}
-                                    @endif {{-- TODO: LEPIEJ TO ZROBVIĆ --}}
-                                </button>
-                                <ul class="dropdown-menu user-select-none">
-                                    <li><a class="dropdown-item assignOpenModal" data-bs-target="#contenderAssignTeamModal"
-                                            data-bs-toggle="modal" contenderID="{{ $contender->id }}">Przypisz
-                                            do drużyny</a></li>
-                                    <li><a class="dropdown-item text-danger unassignOpenModal" data-bs-toggle="modal"
-                                            data-bs-target="#contenderUnassignModal"
-                                            contenderID="{{ $contender->id }}">Usuń
-                                            z drużyny</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>
-                            <button class="btn btn-primary btn-sm editOpenModal" contenderID="{{ $contender->id }}"
-                                contenderName="{{ $contender->name }}" contenderSurname="{{ $contender->last_name }}"
-                                contenderGrade="{{ $contender->class }}" contenderGender="{{ $contender->gender }}"
-                                contenderStatus="{{ $contender->status }}" data-bs-toggle="modal"
-                                data-bs-target="#contenderEditModal">
-                                <i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="btn btn-danger btn-sm delOpenModal" contenderID="{{ $contender->id }}"
-                                data-bs-toggle="modal" data-bs-target="#contenderDeleteModal">
-                                <i class="fa-solid fa-trash-can"></i></button>
-                            {{-- <button type="button" class="btn btn-danger btn-sm"
+                                        @else
+                                            {{ $contender->team_shortcut }}
+                                        @endif {{-- TODO: LEPIEJ TO ZROBVIĆ --}}
+                                    </button>
+                                    <ul class="dropdown-menu user-select-none">
+                                        <li><a class="dropdown-item assignOpenModal"
+                                                data-bs-target="#contenderAssignTeamModal" data-bs-toggle="modal"
+                                                contenderID="{{ $contender->id }}">Przypisz
+                                                do drużyny</a></li>
+                                        <li><a class="dropdown-item text-danger unassignOpenModal" data-bs-toggle="modal"
+                                                data-bs-target="#contenderUnassignModal"
+                                                contenderID="{{ $contender->id }}">Usuń
+                                                z drużyny</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex flex-row align-items-center justify-content-center px-3">
+
+                                    <button class="btn btn-primary btn-sm editOpenModal mx-1"
+                                        contenderID="{{ $contender->id }}" contenderName="{{ $contender->name }}"
+                                        contenderSurname="{{ $contender->last_name }}"
+                                        contenderGrade="{{ $contender->class }}"
+                                        contenderGender="{{ $contender->gender }}"
+                                        contenderStatus="{{ $contender->status }}" data-bs-toggle="modal"
+                                        data-bs-target="#contenderEditModal">
+                                        <i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="btn btn-danger btn-sm delOpenModal mx-1"
+                                        contenderID="{{ $contender->id }}" data-bs-toggle="modal"
+                                        data-bs-target="#contenderDeleteModal">
+                                        <i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                                {{-- <button type="button" class="btn btn-danger btn-sm"
                                 onclick="createToast('Dodano: {{ $contender->name }} {{ $contender->last_name }}');">
                                 <i class="fa-solid fa-trash"></i>
                             </button> --}}
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
     </div>
     {{-- End Contender Table --}}
 @endsection
@@ -141,8 +152,8 @@
                                         <label class="form-check-label fAdd" for="gender"> Kobieta </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input fAdd" type="radio" name="gender" value="M"
-                                            checked />
+                                        <input class="form-check-input fAdd" type="radio" name="gender"
+                                            value="M" checked />
                                         <label class="form-check-label fAdd" for="gender"> Mężczyzna </label>
                                     </div>
                                 </div>

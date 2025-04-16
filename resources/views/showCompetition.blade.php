@@ -6,9 +6,11 @@
 
 @section('content')
     <div class="container">
-        <a type="button" class="btn btn-warning mx-auto my-4 d-block w-75 btn-lg">Generuj Tor</a>
-        <button type="button" class="btn btn-warning mx-auto my-4 d-block w-75 btn-lg" data-bs-toggle="modal"
-            data-bs-target="#competitionAddTeamModal">Dodaj drużynę</button>
+        <div class="row gap-3">
+            <button type="button" class="btn btn-warning mx-auto my-4 d-block btn-lg col">Generuj Tor</button>
+            <button type="button" class="btn btn-warning mx-auto my-4 d-block btn-lg col" data-bs-toggle="modal"
+                data-bs-target="#competitionAddTeamModal">Dodaj drużynę</button>
+        </div>
     </div>
 
     <div class="table-responsive">

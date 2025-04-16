@@ -6,67 +6,74 @@
 
 
     {{-- Add Competition Btn  --}}
-    <button type="button" class="btn btn-warning mx-auto d-block w-25 my-4 btn-lg" data-bs-toggle="modal"
+    <button type="button" class="btn btn-warning mx-auto d-block my-4 btn-lg" data-bs-toggle="modal"
         data-bs-target=" #competition-create-modal">
         Dodaj zawody</button>
     {{-- End Add Competition Btn  --}}
 
 
     {{-- Competition Table --}}
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Nazwa</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="w-100 overflow-x-scroll">
 
-        </tbody>
-    </table>
-    <div class="table-resonsive">
-        <table class="table table-hover">
+        <table class="table">
             <thead>
-                <caption>
-                    Zawody
-                </caption>
-                <tr class="table-warning">
-                    <th scope="col">#</th>
+                <tr>
                     <th scope="col">Nazwa</th>
-                    <th scope="col">Data</th>
-                    <th scope="col">Godzina rozpoczęcia</th>
-                    <th scope="col">Akcja</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($competitions as $competition)
-                    <tr>
-                        <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $competition->name }}</td>
-                        <td>{{ $competition->date }}</td>
-                        <td>{{ $competition->start_time }}</td>
-                        <td>
-                        <button class="btn btn-primary btn-sm editOpenModal" competitionID="{{ $competition->id }}"
-                            competitionName="{{ $competition->name }}" competitionDate="{{ $competition->date }}"
-                            competitionStartTime="{{ $competition->start_time }}"
-                            data-bs-toggle="modal"
-                            data-bs-target="#competitionEditModal">
-                            <i class="fa-solid fa-pen-to-square"></i></button>
-                        <button class="btn btn-danger btn-sm delOpenModal" competitionID="{{ $competition->id }}"
-                            data-bs-toggle="modal" data-bs-target="#competitionDeleteModal">
-                            <i class="fa-solid fa-trash-can"></i></button>
-                        <a href="{{ route('show.competition', $competition->id) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-magnifying-glass"></i></a>
-                        </td>
-                    </tr>
-                @endforeach
+
             </tbody>
         </table>
+        <div class="table-resonsive">
+            <table class="table table-hover">
+                <thead>
+                    <caption>
+                        Zawody
+                    </caption>
+                    <tr class="table-warning">
+                        <th scope="col">#</th>
+                        <th scope="col">Nazwa</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Godzina rozpoczęcia</th>
+                        <th scope="col">Akcja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($competitions as $competition)
+                        <tr>
+                            <th scope="row">{{ $loop->iteration }}</th>
+                            <td>{{ $competition->name }}</td>
+                            <td>{{ $competition->date }}</td>
+                            <td>{{ $competition->start_time }}</td>
+                            <td>
+                                <div class="d-flex flex-row align-items-center justify-content-center px-3">
+
+                                    <button class="btn btn-primary btn-sm editOpenModal mx-1"
+                                        competitionID="{{ $competition->id }}" competitionName="{{ $competition->name }}"
+                                        competitionDate="{{ $competition->date }}"
+                                        competitionStartTime="{{ $competition->start_time }}" data-bs-toggle="modal"
+                                        data-bs-target="#competitionEditModal">
+                                        <i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="btn btn-danger btn-sm delOpenModal mx-1"
+                                        competitionID="{{ $competition->id }}" data-bs-toggle="modal"
+                                        data-bs-target="#competitionDeleteModal">
+                                        <i class="fa-solid fa-trash-can"></i></button>
+                                    <a href="{{ route('show.competition', $competition->id) }}"
+                                        class="btn btn-warning btn-sm mx-1"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
     </div>
     {{-- End Competition Table --}}
-
 @endsection
 
 @section('extras')
-
     {{-- Create Competition Modal --}}
     <div class="modal fade" id="competition-create-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -143,7 +150,7 @@
     {{-- End Delete Competition Modal --}}
 
     {{-- Edit Competition Modal --}}
-    
+
     <div class="modal fade" id="competitionEditModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
@@ -188,12 +195,10 @@
         </div>
     </div>
     {{-- End Edit Competition Modal --}}
-
-
 @endsection
 
 
-    {{-- JS scripts --}}
+{{-- JS scripts --}}
 @section('scripts')
     <script src="{{ asset('js/competitions.js') }}"></script> {{-- TODO: walidacja danych --}}
 @endsection

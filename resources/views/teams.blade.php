@@ -5,44 +5,51 @@
     <h1>Drużyny</h1>
     <p>Lista Drużyn</p>
 
-    <button type="button" class="btn btn-warning mx-auto d-block w-25 my-4 btn-lg" data-bs-toggle="modal"
+    <button type="button" class="btn btn-warning mx-auto d-block my-4 btn-lg" data-bs-toggle="modal"
         data-bs-target=" #teamCreateModal">Dodaj
         drużynę</button>
 
-    <div class="table-resonsive">
-        <table class="table table-hover">
-            <thead>
-                <caption>
-                    Drużyny
-                </caption>
-                <tr class="table-warning">
-                    <th scope="col">#</th>
-                    <th scope="col">Nazwa</th>
-                    <th scope="col">Skrót</th>
-                    <th scope="col">Akcja</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($teams as $team)
-                    <tr>
-                        <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $team->name }}</td>
-                        <td>{{ $team->shortcut }}</td> {{-- TODO: dodać skrót drużyny --}}
-                        <td>
-                            <button class="btn btn-primary btn-sm editOpenModal" teamID="{{ $team->id }}"
-                                teamShortcut="{{ $team->name }}"
-                                data-bs-toggle="modal"
-                                data-bs-target="#teamEditModal">
-                                <i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="btn btn-danger btn-sm delOpenModal" competitionID="{{ $team->id }}"
-                                data-bs-toggle="modal" data-bs-target="#teamDeleteModal">
-                                <i class="fa-solid fa-trash-can"></i></button>
-                            <a href="{{ route("show.team", $team->id) }}" class="btn btn-warning btn-sm"><i class="fa-solid fa-magnifying-glass"></i></a>
-                        </td>
+    <div class="w-100 overflow-x-scroll">
+
+        <div class="table-resonsive">
+            <table class="table table-hover">
+                <thead>
+                    <caption>
+                        Drużyny
+                    </caption>
+                    <tr class="table-warning">
+                        <th scope="col">#</th>
+                        <th scope="col">Nazwa</th>
+                        <th scope="col">Skrót</th>
+                        <th scope="col">Akcja</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($teams as $team)
+                        <tr>
+                            <th scope="row">{{ $loop->iteration }}</th>
+                            <td>{{ $team->name }}</td>
+                            <td>{{ $team->shortcut }}</td> {{-- TODO: dodać skrót drużyny --}}
+                            <td>
+                                <div class="d-flex flex-row align-items-center justify-content-center px-3">
+                                    <button class="btn btn-primary btn-sm editOpenModal mx-1" teamID="{{ $team->id }}"
+                                        teamShortcut="{{ $team->name }}" data-bs-toggle="modal"
+                                        data-bs-target="#teamEditModal">
+                                        <i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="btn btn-danger btn-sm delOpenModal mx-1"
+                                        competitionID="{{ $team->id }}" data-bs-toggle="modal"
+                                        data-bs-target="#teamDeleteModal">
+                                        <i class="fa-solid fa-trash-can"></i></button>
+                                    <a href="{{ route('show.team', $team->id) }}" class="btn btn-warning btn-sm mx-1"><i
+                                            class="fa-solid fa-magnifying-glass"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
     </div>
 @endsection
 
@@ -147,7 +154,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @section('scripts')
