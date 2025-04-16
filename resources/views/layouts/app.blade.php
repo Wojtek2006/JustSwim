@@ -14,6 +14,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     {{-- Ikonka  --}}
     <link rel="shortcut icon" href="{{ asset('./img/favicon.ico') }}" type="image/x-icon">
+    @yield('head')
 </head>
 
 <body>

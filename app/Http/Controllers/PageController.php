@@ -14,7 +14,11 @@ class PageController extends Controller
 {
     public function index()
     {
-        return view('index');
+        $competitionsNum = Competition::all()->count();
+        $contendersNum = Contender::all()->count();
+        $teamsNum = Team::all()->count();
+        $nearestCompetitions = Competition::select()->where("date", ">", now()->subDay())->orderBy("date")->limit(3)->get();
+        return view('index', ['competitionsNum' => $competitionsNum, 'contendersNum' => $contendersNum, 'teamsNum' => $teamsNum, "nearestCompetitions" => $nearestCompetitions]);
     }
 
     public function contenders()
