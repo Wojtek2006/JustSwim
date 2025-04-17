@@ -13,7 +13,7 @@
 
 
     {{-- Competition Table --}}
-    <div class="w-100 overflow-x-scroll">
+    <div class="w-100 overflow-x-auto">
 
         <table class="table">
             <thead>

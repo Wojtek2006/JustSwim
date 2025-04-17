@@ -1,7 +1,7 @@
-.nearestCompetitionButton:hover {
+.translateRight-hover:hover {
     transform: translate(15px);
 }
-.nearestCompetitionButton {
+.translateRight-hover {
     transition: transform ease-out 0.2s;
 }
 
@@ -18,5 +18,11 @@
     #jumbotron {
         background-position-x: 50%;
         background-size: 200%;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .quickActions > .col {
+        width: 100%;
     }
 }

@@ -13,21 +13,35 @@
 @endsection
 
 @section('content')
-    <div class="container w-75 py-3">
-        <div class="container my-3">
-            <h3 class="text-center">Najbliższe zawody:</h3>
-            <ul class="list-group">
-                @foreach ($nearestCompetitions as $comp)
-                    <a href="{{ route('show.competition', $comp->id) }}"
-                        class="list-group-item list-group-item py-3 nearestCompetitionButton position-relative">
-                        <span class=" fw-bold">{{ $comp->name }}</span>
-                        -
-                        <span class=" fw-bold">{{ $comp->date }}</span>
-                        o godzinie
-                        <span class=" fw-bold">{{ $comp->start_time }}</span>
-                    </a>
-                @endforeach
-            </ul>
+    <div class="container">
+        <div class="row quickActions">
+
+            <div class="col-lg-6 col-md-12 my-3">
+                <h3 class="text-center">Najbliższe zawody:</h3>
+                <div class="list-group">
+                    @foreach ($nearestCompetitions as $comp)
+                        <a href="{{ route('show.competition', $comp->id) }}"
+                            class="list-group-item list-group-item-action py-3 translateRight-hover position-relative">
+                            <span class=" fw-bold">{{ $comp->name }}</span>
+                            -
+                            <span class=" fw-bold">{{ $comp->date }}</span>
+                            o godzinie
+                            <span class=" fw-bold">{{ $comp->start_time }}</span>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 my-3">
+                <h3 class="text-center">Szybkie działania:</h3>
+                <div class="list-group quickActionsList">
+                    @foreach ([['Zawodnicy', 'contenders'], ['Drużyny', 'teams'], ['Zawody', 'competitions']] as $link)
+                        <a href="{{ route($link[1]) }}"
+                            class="list-group-item list-group-item-action py-3  translateRight-hover">
+                            {{ $link[0] }}
+                        </a>
+                    @endforeach
+                </div>
+            </div>
         </div>
         <div class="container text-center my-3">
             <h3>Statystyki:</h3>

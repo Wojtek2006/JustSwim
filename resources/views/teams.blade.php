@@ -9,7 +9,7 @@
         data-bs-target=" #teamCreateModal">Dodaj
         drużynę</button>
 
-    <div class="w-100 overflow-x-scroll">
+    <div class="w-100 overflow-x-auto">
 
         <div class="table-resonsive">
             <table class="table table-hover">
